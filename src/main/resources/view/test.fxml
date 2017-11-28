@@ -58,7 +58,7 @@
                         <Insets/>
                     </VBox.margin>
                 </HBox>
-                <TextArea editable="false" prefHeight="260.0" prefWidth="1240.0"/>
+                <TextArea fx:id="textArea" editable="false" prefHeight="260.0" prefWidth="1240.0"/>
                 <TextField fx:id="textField" onKeyPressed="#onEnter"/>
             </children>
             <BorderPane.margin>
