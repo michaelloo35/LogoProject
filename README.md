@@ -1,1 +1,3 @@
-Michał Mati Project
+#Instrukcja uruchomienia
+
+* uruchomić metodę main w klasie Main
