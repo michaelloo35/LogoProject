@@ -34,14 +34,14 @@
             <HBox prefHeight="73.0" prefWidth="1239.0" spacing="10.0">
                <children>
                   <Pane opacity="0.0" prefHeight="200.0" prefWidth="1114.0" />
-                  <Button mnemonicParsing="false" stylesheets="@stylesheet.css" text="FILE" textAlignment="CENTER">
+                  <Button mnemonicParsing="false" stylesheets="@../stylesheet.css" text="FILE" textAlignment="CENTER">
                      <font>
                         <Font name="Trebuchet MS Bold" size="15.0" />
                      </font>
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin></Button>
-                  <Button mnemonicParsing="false" stylesheets="@stylesheet.css" text="SAVE" textAlignment="CENTER">
+                  <Button mnemonicParsing="false" stylesheets="@../stylesheet.css" text="SAVE" textAlignment="CENTER">
                      <font>
                         <Font name="Trebuchet MS Bold" size="15.0" />
                      </font>
