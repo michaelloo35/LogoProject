@@ -9,15 +9,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #4e4e4e;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #4e4e4e;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
          <children>
-            <Pane prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-border-color: #363636; -fx-border-width: 5;">
+            <Pane fx:id="canvaspane" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-border-color: #363636; -fx-border-width: 5;">
                <children>
                   <Canvas height="390.0" layoutX="5.0" layoutY="5.0" width="1230.0" />
                </children>
@@ -28,17 +29,36 @@
          </children></VBox>
    </center>
    <bottom>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="245.0" prefWidth="1240.0" spacing="5.0" style="-fx-background-color: #4e4e4e;" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="73.0" prefWidth="1239.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
+                  <Pane opacity="0.0" prefHeight="200.0" prefWidth="1114.0" />
+                  <Button mnemonicParsing="false" stylesheets="@stylesheet.css" text="FILE" textAlignment="CENTER">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin></Button>
+                  <Button mnemonicParsing="false" stylesheets="@stylesheet.css" text="SAVE" textAlignment="CENTER">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin></Button>
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
-            <TextArea prefHeight="200.0" prefWidth="200.0" />
+            <TextArea editable="false" prefHeight="260.0" prefWidth="1240.0" />
             <TextField />
          </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </BorderPane.margin>
       </VBox>
    </bottom>
 </BorderPane>
