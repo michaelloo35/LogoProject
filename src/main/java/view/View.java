@@ -10,6 +10,7 @@ import java.io.IOException;
 public class View {
 
     private static final String TITLE = "Wildschwein zeichnen";
+    public static final String FXML_FILE_NAME = "test.fxml";
     private Stage primaryStage;
 
     public View(Stage primaryStage) {
@@ -27,6 +28,6 @@ public class View {
     }
 
     private Parent getRoot() throws java.io.IOException {
-        return FXMLLoader.load(getClass().getResource("/view/test.fxml"));
+        return FXMLLoader.load(getClass().getResource("/view/" + FXML_FILE_NAME));
     }
 }
