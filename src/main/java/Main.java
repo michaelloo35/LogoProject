@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import view.View;
 
 public class Main extends Application {
 
@@ -12,10 +13,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/test.fxml"));
-        primaryStage.setTitle("Wildschwein zeichnen");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        View view = new View(primaryStage);
+        view.showStage();
     }
 
 }
