@@ -28,6 +28,6 @@ public class View {
     }
 
     private Parent getRoot() throws java.io.IOException {
-        return FXMLLoader.load(getClass().getResource("/view/" + FXML_FILE_NAME));
+        return FXMLLoader.load(getClass().getResource(FXML_FILE_NAME));
     }
 }
