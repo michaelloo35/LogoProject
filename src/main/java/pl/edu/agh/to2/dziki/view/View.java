@@ -1,4 +1,4 @@
-package view;
+package pl.edu.agh.to2.dziki.view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

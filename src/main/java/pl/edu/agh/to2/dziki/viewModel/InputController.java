@@ -1,4 +1,4 @@
-package viewModel;
+package pl.edu.agh.to2.dziki.viewModel;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;

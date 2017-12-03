@@ -1,9 +1,8 @@
+package pl.edu.agh.to2.dziki.application;
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import view.View;
+import pl.edu.agh.to2.dziki.view.View;
 
 public class Main extends Application {
 
