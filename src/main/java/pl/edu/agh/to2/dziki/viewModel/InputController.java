@@ -7,7 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import pl.edu.agh.to2.dziki.model.InputParser;
+import pl.edu.agh.to2.dziki.viewModel.parser.InputParser;
 
 
 public class InputController {

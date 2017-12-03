@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.model;
+package pl.edu.agh.to2.dziki.viewModel.parser;
 
 public enum Command {
     UP(1),

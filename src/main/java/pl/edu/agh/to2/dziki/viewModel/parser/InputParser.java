@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.model;
+package pl.edu.agh.to2.dziki.viewModel.parser;
 
 import java.util.Arrays;
 import java.util.List;
