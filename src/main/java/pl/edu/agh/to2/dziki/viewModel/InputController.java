@@ -23,13 +23,17 @@ public class InputController {
     @FXML
     private TextArea textArea;
 
-    private GraphicsContext gc;
+    private GraphicsContext graphicsContext;
+    private Boar boar;
+
+    @FXML
+    public void initialize() {
+        graphicsContext = canvas.getGraphicsContext2D();
+        boar = new Boar(canvas, graphicsContext);
+    }
 
     @FXML
     public void onEnter(KeyEvent ke) {
-        // TODO can controller have a state ? where do we initialize it?
-        gc = canvas.getGraphicsContext2D();
-        Boar boar = new Boar(canvas, gc);
         if (ke.getCode().equals(KeyCode.ENTER)) {
             String message = textField.getText();
             textArea.appendText(message + "\n");
