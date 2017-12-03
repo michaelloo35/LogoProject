@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.logic;
+package pl.edu.agh.to2.dziki.Model;
 
 import java.util.List;
 

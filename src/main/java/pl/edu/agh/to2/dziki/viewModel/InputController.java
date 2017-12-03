@@ -8,10 +8,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import pl.edu.agh.to2.dziki.Model.InputParser;
 
 
 public class InputController {
 
+    private InputParser inputParser;
 
     @FXML
     private TextField textField;
