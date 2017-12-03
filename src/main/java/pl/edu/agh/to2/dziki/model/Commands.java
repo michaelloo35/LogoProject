@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.Model;
+package pl.edu.agh.to2.dziki.model;
 
 public enum Commands {
     UP,

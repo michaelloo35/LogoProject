@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import pl.edu.agh.to2.dziki.Model.InputParser;
+import pl.edu.agh.to2.dziki.model.InputParser;
 
 
 public class InputController {
@@ -34,7 +34,7 @@ public class InputController {
             textField.clear();
             gc = canvas.getGraphicsContext2D();
             Image image = new Image(getClass().getClassLoader().getResourceAsStream("boar.png"));
-            gc.drawImage(image,0,0);
+            gc.drawImage(image, 0, 0);
         }
     }
 
