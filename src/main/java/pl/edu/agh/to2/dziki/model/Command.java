@@ -1,6 +1,6 @@
 package pl.edu.agh.to2.dziki.model;
 
-public enum Commands {
+public enum Command {
     UP,
     DOWN,
     RIGHT,
