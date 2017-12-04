@@ -5,6 +5,7 @@ public enum Command {
     DOWN(1),
     RIGHT(1),
     LEFT(1),
+    TURN(1),
     BACK(0),
     HIDE(0),
     SHOW(0),
