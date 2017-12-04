@@ -37,9 +37,21 @@ public class InputController {
         if (ke.getCode().equals(KeyCode.ENTER)) {
             String message = textField.getText();
             textArea.appendText(message + "\n");
-            textField.clear();
-            boar.initialize();
+            switch (message) {
+                case "start":
+                    boar.initialize(100, 100);
+                    break;
+                case "rotate":
+                    boar.rotate(10);
+                    break;
+                case "rotater":
+                    boar.rotate(-10);
+                    break;
+            }
+//            TODO commented for testing purposes
+//            textField.clear();
         }
+
     }
 
 
