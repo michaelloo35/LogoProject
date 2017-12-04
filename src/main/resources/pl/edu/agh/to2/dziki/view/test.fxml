@@ -19,7 +19,10 @@
                 <Pane fx:id="canvaspane" prefHeight="400.0" prefWidth="200.0"
                       style="-fx-background-color: #f6f6f6; -fx-border-color: #363636; -fx-border-width: 5;">
                     <children>
-                        <Canvas fx:id="canvas" height="390.0" layoutX="5.0" layoutY="5.0" width="1230.0"/>
+                        <Canvas fx:id="layer1" height="390.0" layoutX="5.0" layoutY="5.0" width="1230.0"/>
+                    </children>
+                    <children>
+                        <Canvas fx:id="layer2" height="390.0" layoutX="5.0" layoutY="5.0" width="1230.0"/>
                     </children>
                     <VBox.margin>
                         <Insets left="20.0" right="20.0" top="20.0"/>
@@ -35,7 +38,7 @@
                 <HBox prefHeight="73.0" prefWidth="1239.0" spacing="10.0">
                     <children>
                         <Pane opacity="0.0" prefHeight="200.0" prefWidth="1114.0"/>
-                        <Button mnemonicParsing="false" stylesheets="@../stylesheet.css" text="FILE"
+                        <Button mnemonicParsing="false" stylesheets="@stylesheet.css" text="FILE"
                                 textAlignment="CENTER">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="15.0"/>
@@ -44,7 +47,7 @@
                                 <Insets top="5.0"/>
                             </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" stylesheets="@../stylesheet.css" text="SAVE"
+                        <Button mnemonicParsing="false" stylesheets="@stylesheet.css" text="SAVE"
                                 textAlignment="CENTER">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="15.0"/>
