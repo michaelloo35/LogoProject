@@ -1,5 +1,7 @@
 package pl.edu.agh.to2.dziki.viewModel.parser;
 
+import java.util.Arrays;
+
 public enum Command {
     UP(1),
     DOWN(1),
@@ -23,6 +25,10 @@ public enum Command {
     }
 
     public int getArgumentsNumber() {
+
         return argumentsNumber;
+    }
+    public static String[] getCommandNames(Class<? extends Enum<?>> e) {
+        return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
     }
 }
