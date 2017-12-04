@@ -28,7 +28,7 @@ public enum Command {
 
         return argumentsNumber;
     }
-    public static String[] getCommandNames(Class<? extends Enum<?>> e) {
-        return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
+    public static String[] getCommandNames() {
+        return Arrays.stream(Command.class.getEnumConstants()).map(Enum::name).toArray(String[]::new);
     }
 }

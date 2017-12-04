@@ -23,7 +23,7 @@ public class InputParser {
     private List<String> validate(List<String> input) {
         if (input.isEmpty())
             throw new IllegalArgumentException("Command cannot be empty");
-        if (!Arrays.asList(Command.getCommandNames(Command.class)).contains(input.get(0)))
+        if (!Arrays.asList(Command.getCommandNames()).contains(input.get(0)))
             throw new IllegalArgumentException("Task has to start with command name");
         if (Command.LOOP.toString().equals(input.get(0)))
             validateComplexTask(input);
