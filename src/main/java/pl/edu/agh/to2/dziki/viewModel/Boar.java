@@ -15,6 +15,7 @@ public class Boar {
     private final Image image;
     private final Canvas canvasLayer;
     private final GraphicsContext graphicsContext;
+    //TODO this has to be position of center of the boar not the upper left corner or we have to keep also position of center
     private final Position position;
 
     public Boar(Canvas layer) {
@@ -45,12 +46,13 @@ public class Boar {
         params.setViewport(new Rectangle2D(0, 0, image.getWidth(), image.getHeight()));
         params.setFill(Color.TRANSPARENT);
         Image rotatedImage = iv.snapshot(params, null);
+
         graphicsContext.clearRect(0, 0, canvasLayer.getWidth(), canvasLayer.getHeight());
         graphicsContext.drawImage(rotatedImage, position.getX(), position.getY());
+        update();
     }
 
     private void update() {
         graphicsContext.save();
-        System.out.println(position.getRotation());
     }
 }
