@@ -23,8 +23,8 @@ public class InputParserTest {
 
     @Test
     public void parseComplexTaskTest() throws Exception {
-        String input = "LOOP 100 UP 20 TURN 30 ENDLOOP";
-        List<String> expectedResult = Arrays.asList("LOOP", "100", "UP", "20",
+        String input = "LOOP 100 FORWARD 20 TURN 30 ENDLOOP";
+        List<String> expectedResult = Arrays.asList("LOOP", "100", "FORWARD", "20",
                 "TURN", "30", "ENDLOOP");
 
         assertThat(inputParser.parse(input), is(expectedResult));
@@ -33,11 +33,11 @@ public class InputParserTest {
 
     @Test
     public void parseSimpleTaskTest() throws Exception {
-        String input = "UP 20";
-        String input2 = "DOWN 90";
+        String input = "FORWARD 20";
+        String input2 = "BACKWARD 90";
         String input3 = "CLEAR";
-        List<String> expectedResult = Arrays.asList("UP", "20");
-        List<String> expectedResult2 = Arrays.asList("DOWN", "90");
+        List<String> expectedResult = Arrays.asList("FORWARD", "20");
+        List<String> expectedResult2 = Arrays.asList("BACKWARD", "90");
         List<String> expectedResult3 = Arrays.asList("CLEAR");
 
         assertThat(inputParser.parse(input), is(expectedResult));
@@ -48,7 +48,7 @@ public class InputParserTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parseIncorrectComplexTest() throws Exception{
-        String input = "LOOP 100 UP 20 30 ENDLOOP";
+        String input = "LOOP 100 FORWARD 20 30 ENDLOOP";
 
         List<String> output = inputParser.parse(input);
     }

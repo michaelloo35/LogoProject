@@ -4,7 +4,7 @@ import pl.edu.agh.to2.dziki.model.Boar;
 
 import java.util.List;
 
-public class UpTask implements ITask<Boar> {
+public class BackwardTask implements ITask<Boar> {
 
     @Override
     public void execute(Boar model, List<String> parameters) {
@@ -12,7 +12,7 @@ public class UpTask implements ITask<Boar> {
                 .getPosition()
                 .getY();
 
-        model.getPosition().setY( actualYPosition +
+        model.getPosition().setY( actualYPosition -
                 Integer.parseInt(parameters.get(1)));
     }
 }

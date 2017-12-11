@@ -5,10 +5,10 @@ import pl.edu.agh.to2.dziki.presenter.Position;
 
 import java.util.List;
 
-public class BackTask implements ITask<Boar> {
+public class RestartTask implements ITask<Boar> {
 
     @Override
     public void execute(Boar model, List<String> parameters) {
-
+        model.initialize();
     }
 }

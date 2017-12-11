@@ -8,6 +8,6 @@ public class HideTask implements ITask<Boar> {
 
     @Override
     public void execute(Boar model, List<String> parameters) {
-
+        model.hide();
     }
 }
