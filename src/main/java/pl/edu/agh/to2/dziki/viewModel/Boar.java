@@ -8,10 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class Boar {
 
+    private static final Logger log = LogManager.getLogger(Boar.class);
     private final static String path = "boar.png";
+    private static final String POSITION_MESSAGE = "Boar position set to x:%.2f y:%.2f %n";
     private final Image image;
     private final Canvas canvasLayer;
     private final GraphicsContext graphicsContext;
@@ -29,12 +33,15 @@ public class Boar {
     public void initialize() {
         this.position.setX(0);
         this.position.setY(0);
+        log.info(String.format(POSITION_MESSAGE,0.0,0.0));
         graphicsContext.drawImage(image, position.getX(), position.getY());
     }
 
     public void initialize(double x, double y) {
         this.position.setX(x);
         this.position.setY(y);
+        log.info(String.format(POSITION_MESSAGE,x,y));
+
         graphicsContext.drawImage(image, position.getX(), position.getY());
     }
 
