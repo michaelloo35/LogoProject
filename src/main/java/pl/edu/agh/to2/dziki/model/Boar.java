@@ -15,13 +15,15 @@ import pl.edu.agh.to2.dziki.presenter.Position;
 public class Boar {
 
     private static final Logger log = LogManager.getLogger(Boar.class);
-    private final static String path = "boar.png";
+    private static final String path = "boar.png";
     private static final String POSITION_MESSAGE = "Boar position set to x:%.2f y:%.2f %n";
     private final Image image;
     private final Canvas canvasLayer;
     private final GraphicsContext graphicsContext;
+
+
     //TODO this has to be position of center of the boar not the upper left corner or we have to keep also position of center
-    private final Position position;
+    private Position position;
 
     public Boar(Canvas layer) {
         this.canvasLayer = layer;
@@ -34,14 +36,14 @@ public class Boar {
     public void initialize() {
         this.position.setX(0);
         this.position.setY(0);
-        log.info(String.format(POSITION_MESSAGE,0.0,0.0));
+        log.info(String.format(POSITION_MESSAGE, 0.0, 0.0));
         graphicsContext.drawImage(image, position.getX(), position.getY());
     }
 
     public void initialize(double x, double y) {
         this.position.setX(x);
         this.position.setY(y);
-        log.info(String.format(POSITION_MESSAGE,x,y));
+        log.info(String.format(POSITION_MESSAGE, x, y));
 
         graphicsContext.drawImage(image, position.getX(), position.getY());
     }
@@ -62,5 +64,12 @@ public class Boar {
 
     private void update() {
         graphicsContext.save();
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+    public void setPosition(Position position){
+        this.position = position;
     }
 }
