@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.viewModel;
+package pl.edu.agh.to2.dziki.model;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import pl.edu.agh.to2.dziki.viewModel.Position;
 
 public class Boar {
 
