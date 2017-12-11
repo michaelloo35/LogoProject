@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.viewModel.parser;
+package pl.edu.agh.to2.dziki.presenter.parser;
 
 import java.util.Arrays;
 

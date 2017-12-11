@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import pl.edu.agh.to2.dziki.viewModel.Position;
+import pl.edu.agh.to2.dziki.presenter.Position;
 
 public class Boar {
 

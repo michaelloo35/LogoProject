@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.viewModel;
+package pl.edu.agh.to2.dziki.presenter;
 
 public class Position {
     private double x;

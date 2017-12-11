@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.viewModel;
+package pl.edu.agh.to2.dziki.presenter;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import pl.edu.agh.to2.dziki.model.Boar;
-import pl.edu.agh.to2.dziki.viewModel.parser.InputParser;
+import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
 
 
 public class InputController {

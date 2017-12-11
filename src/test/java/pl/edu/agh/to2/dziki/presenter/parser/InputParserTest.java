@@ -1,9 +1,7 @@
-package pl.edu.agh.to2.dziki.viewModel.parser;
+package pl.edu.agh.to2.dziki.presenter.parser;
 
 import org.junit.Test;
-import sun.reflect.annotation.ExceptionProxy;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
