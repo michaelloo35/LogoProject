@@ -4,10 +4,10 @@ import pl.edu.agh.to2.dziki.model.Boar;
 
 import java.util.List;
 
-public class LowerTask implements ITask<Boar> {
+public class LowerTask implements Task<Boar> {
 
     @Override
     public void execute(Boar model, List<String> parameters) {
-        model.setIsLift(false);
+        model.lower();
     }
 }

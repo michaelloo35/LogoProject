@@ -4,7 +4,7 @@ import pl.edu.agh.to2.dziki.model.Boar;
 
 import java.util.List;
 
-public class ForwardTask implements ITask<Boar> {
+public class ForwardTask implements Task<Boar> {
 
     @Override
     public void execute(Boar model, List<String> parameters) {
