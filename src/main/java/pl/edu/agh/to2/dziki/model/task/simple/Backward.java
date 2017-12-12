@@ -8,7 +8,7 @@ public class Backward implements Task {
 
     private double distance;
 
-    public Backward(double distance){
+    public Backward(double distance) {
         this.distance = distance;
     }
 
