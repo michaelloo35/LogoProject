@@ -3,12 +3,12 @@ package pl.edu.agh.to2.dziki.presenter.parser;
 import java.util.Arrays;
 
 public enum Command {
-    UP(1),
-    DOWN(1),
+    FORWARD(1),
+    BACKWARD(1),
     RIGHT(1),
     LEFT(1),
     TURN(1),
-    BACK(0),
+    RESTART(0),
     HIDE(0),
     SHOW(0),
     CLEAR(0),

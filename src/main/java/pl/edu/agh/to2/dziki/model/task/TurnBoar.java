@@ -8,6 +8,6 @@ public class TurnBoar implements ITask<Boar> {
 
     @Override
     public void execute(Boar model, List<String> parameters) {
-
+        model.getPosition().rotate(Integer.parseInt(parameters.get(1)));
     }
 }

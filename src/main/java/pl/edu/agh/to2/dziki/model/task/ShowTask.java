@@ -8,6 +8,6 @@ public class ShowTask implements ITask<Boar> {
 
     @Override
     public void execute(Boar model, List<String> parameters) {
-
+        model.show();
     }
 }
