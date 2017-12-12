@@ -57,6 +57,12 @@ public class InputController {
                 case "h":
                     boar.hide();
                     break;
+                case "lift":
+                    boar.lift();
+                    break;
+                case "lower":
+                    boar.lower();
+                    break;
 
             }
 //            TODO commented for testing purposes

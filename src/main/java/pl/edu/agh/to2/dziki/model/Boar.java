@@ -5,9 +5,7 @@ import org.apache.logging.log4j.Logger;
 import pl.edu.agh.to2.dziki.presenter.Position;
 import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-import static java.lang.Math.toRadians;
+import static java.lang.Math.*;
 
 public class Boar {
 
@@ -58,7 +56,10 @@ public class Boar {
         double newY = startY + sin(toRadians(position.getRotation())) * distance;
 
         setPosition(newX, newY, position.getRotation());
-        viewUpdater.moveAndDraw(this, startX, startY);
+        if (!isLift)
+            viewUpdater.moveAndDraw(this, startX, startY);
+        else
+            viewUpdater.updateBoarPosition(this);
     }
 
     public void moveBackward(double distance) {
@@ -70,7 +71,10 @@ public class Boar {
         double newY = startY - sin(toRadians(position.getRotation())) * distance;
 
         setPosition(newX, newY, position.getRotation());
-        viewUpdater.moveAndDraw(this, startX, startY);
+        if (!isLift)
+            viewUpdater.moveAndDraw(this, startX, startY);
+        else
+            viewUpdater.updateBoarPosition(this);
     }
 
     public void setPosition(double x, double y, double rotationDegrees) {
