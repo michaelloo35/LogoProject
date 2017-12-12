@@ -57,6 +57,9 @@ public class InputController {
                 case "h":
                     boar.hide();
                     break;
+                case "s":
+                    boar.show();
+                    break;
                 case "lift":
                     boar.lift();
                     break;
