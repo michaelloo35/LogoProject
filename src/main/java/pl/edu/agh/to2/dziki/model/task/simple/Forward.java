@@ -6,15 +6,15 @@ import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 public class Forward implements Task {
 
-    private double yAxisShift;
+    private double distance;
 
-    public Forward(double yAxisShift){
-        this.yAxisShift = yAxisShift;
+    public Forward(double distance){
+        this.distance = distance;
     }
 
     @Override
     public void execute(Boar model, ViewUpdater updater) {
-        model.moveForward(yAxisShift);
+        model.moveForward(distance);
     }
 
     @Override
