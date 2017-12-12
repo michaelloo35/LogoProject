@@ -41,16 +41,17 @@ w przyszlej iteracji.
 Istnieje tez maly blad w for loopie.
 
 przykładowe wywołanie:
-TURN 30
-FORWARD 100
-HIDE
-SHOW
-LIFT
-FORWARD 300
-TURN 49
-FORWARD 300
-LOWER
-RIGHT 30
-LOOP 18 TURN 10 FORWARD 15 ENDLOOP
+* RESTART
+* TURN 30
+* FORWARD 100
+* HIDE
+* SHOW
+* LIFT
+* FORWARD 300
+* TURN 49
+* FORWARD 300
+* LOWER
+* RIGHT 30
+* LOOP 18 TURN 10 FORWARD 15 ENDLOOP
 
 (loop do poprawy)
