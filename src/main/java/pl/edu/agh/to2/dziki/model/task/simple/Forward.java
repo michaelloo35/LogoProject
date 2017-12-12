@@ -14,12 +14,7 @@ public class Forward implements Task {
 
     @Override
     public void execute(Boar model, ViewUpdater updater) {
-        double actualYPosition = model
-                .getPosition()
-                .getY();
-
-        model.getPosition().setY(actualYPosition +
-                this.yAxisShift);
+        model.moveForward(yAxisShift);
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Turn implements Task {
 
     @Override
     public void execute(Boar model, ViewUpdater updater) {
-        model.getPosition().rotate(this.degree);
+        model.rotate(degree);
     }
 
     @Override

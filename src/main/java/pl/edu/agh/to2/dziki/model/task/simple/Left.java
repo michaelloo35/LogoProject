@@ -14,12 +14,8 @@ public class Left implements Task {
 
     @Override
     public void execute(Boar model, ViewUpdater updater) {
-        double actualXPosition = model
-                .getPosition()
-                .getX();
-
-        model.getPosition().setY(actualXPosition -
-                this.xAxisShift);
+        model.rotate(-90.0);
+        model.moveForward(xAxisShift);
     }
 
     @Override

@@ -8,7 +8,7 @@ public class Lift implements Task {
 
     @Override
     public void execute(Boar model, ViewUpdater updater) {
-        model.lower();
+        model.lift();
     }
 
     @Override
