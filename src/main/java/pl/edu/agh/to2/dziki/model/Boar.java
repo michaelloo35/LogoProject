@@ -43,7 +43,10 @@ public class Boar {
     }
 
     public void setPosition(double x, double y, double rotationDegrees) {
-        this.setPosition(x, y, rotationDegrees);
+        position.setX(x);
+        position.setY(y);
+        position.setRotation(rotationDegrees);
+
         boarViewUpdater.initialize(this);
         boarViewUpdater.updateRotation(this);
     }

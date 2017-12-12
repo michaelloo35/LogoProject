@@ -6,16 +6,26 @@ import pl.edu.agh.to2.dziki.presenter.BoarViewUpdater;
 
 import java.util.List;
 
-public class Loop implements Task{
+public class Loop implements Task {
+
+    private final int numberOfIterations;
+    private final List<Task> nestedTasks;
+
+    public Loop(int numberOfIterations, List<Task> nestedTasks) {
+        this.numberOfIterations = numberOfIterations;
+        this.nestedTasks = nestedTasks;
+    }
 
     @Override
     public void execute(Boar boar, BoarViewUpdater updater) {
-
+        for (int i = 0; i < numberOfIterations; i++) {
+            nestedTasks.forEach(t -> t.execute(boar, updater));
+        }
     }
 
     @Override
     public boolean isComplex() {
-        return false;
+        return true;
     }
 
 }
