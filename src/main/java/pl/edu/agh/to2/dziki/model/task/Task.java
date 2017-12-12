@@ -1,7 +1,10 @@
 package pl.edu.agh.to2.dziki.model.task;
 
-import java.util.List;
+import pl.edu.agh.to2.dziki.model.Boar;
+import pl.edu.agh.to2.dziki.presenter.BoarViewUpdater;
 
-public interface Task<T> {
-    void execute(T model, List<String> parameters);
+public interface Task {
+    void execute(Boar boar, BoarViewUpdater updater);
+
+    boolean isComplex();
 }
