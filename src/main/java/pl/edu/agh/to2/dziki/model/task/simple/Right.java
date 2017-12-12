@@ -6,6 +6,12 @@ import pl.edu.agh.to2.dziki.presenter.BoarViewUpdater;
 
 public class Right implements Task {
 
+    private double xAxisShift;
+
+    public Right(double xAxisShift){
+        this.xAxisShift = xAxisShift;
+    }
+
     @Override
     public void execute(Boar model, BoarViewUpdater updater) {
         double actualXPosition = model
@@ -13,7 +19,7 @@ public class Right implements Task {
                 .getX();
 
         model.getPosition().setY(actualXPosition +
-                Integer.parseInt(parameters.get(1)));
+                xAxisShift);
     }
 
     @Override

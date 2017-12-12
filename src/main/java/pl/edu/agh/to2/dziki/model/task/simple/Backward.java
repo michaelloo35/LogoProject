@@ -6,6 +6,11 @@ import pl.edu.agh.to2.dziki.presenter.BoarViewUpdater;
 
 public class Backward implements Task {
 
+    private double yAxisShift;
+
+    public Backward(double yAxisShift){
+        this.yAxisShift = yAxisShift;
+    }
 
     @Override
     public void execute(Boar model, BoarViewUpdater updater) {
@@ -14,7 +19,7 @@ public class Backward implements Task {
                 .getY();
 
         model.getPosition().setY(actualYPosition -
-                Integer.parseInt(parameters.get(1)));
+                this.yAxisShift);
     }
 
     @Override
