@@ -28,3 +28,6 @@ Plany na przyszłą iteracje:
  * Diagram klas
  * Zaimplementowanie historii polecen z użyciem wzorca Command.
  * Dodanie granic rysowania dla dzika (moze?)
+ 
+Jestesmy swiadomi, ze controller sie troche rozrosl i zamierzamy przenisc 
+odpowiedzialnosc executowania taskow do modelu.
