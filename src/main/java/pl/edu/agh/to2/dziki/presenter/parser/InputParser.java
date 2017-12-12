@@ -20,6 +20,7 @@ public class InputParser {
      * Throws IllegalArgumentException if input is incorrect.
      */
     private List<String> validate(List<String> input) {
+        input.replaceAll(String::toUpperCase);
         if (input.isEmpty())
             throw new IllegalArgumentException("Command cannot be empty");
 

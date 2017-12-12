@@ -23,7 +23,7 @@ public class InputInterpreter {
             Command command = Command.valueOf(validatedInput.get(i));
 
             if (command.equals(Command.LOOP)) {
-                List<String> forSublist = unwrapLoopStatement(validatedInput, i + 1);
+                List<String> forSublist = unwrapLoopStatement(validatedInput, i + 2);
                 skipIterations = forSublist.size() + 2;
                 taskList.add(createLoopTask(validatedInput, parseInt(validatedInput.get(i + 1)), forSublist));
                 i += skipIterations;

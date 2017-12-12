@@ -3,15 +3,16 @@
 * uruchomić metodę main w klasie pl.edu.agh.to2.dziki.application.Main
 * lista działających komend:
 
-    * "start": inicjalizuje dzika
-    * "r": obraca dzika w prawo o 10 stopni
-    * "rr": obraca dzika w lewo o 10 stopni
-    * "f": dzik idzie do przodu o 10 jednostek zostawiajac ślad jesli jest opuszczony
-    * "b": dzik idzie do tyłu o 10 jednostek zostawiajac ślad jesli jest opuszczony
-    * "h": dzik się chowa poruszenie wyłania go z ukrycia
-    * "s": dzik wychodzi z ukrycia
-    * "lift": uniesienie dzika
-    * "lower": opuszczenie dzika
+    * forward [wartosc] - porusza sie do przodu o okreslona wartosc
+    * backward [wartosc] - porusza sie do przodu o okreslona wartosc
+    * left [wartosc] - porusza sie w lewo o okreslona wartosc
+    * right [wartosc] - porusza sie w prawo o okreslona wartosc
+    * turn [kąt] obraca dzika o zadany kat
+    * hide - dzik się chowa poruszenie wyłania go z ukrycia
+    * show - dzik wychodzi z ukrycia
+    * lift - uniesienie dzika
+    * lower - opuszczenie dzika
+    * restart - ustawia dzika na poczatkowe polozenie
 
 
 ###Milestone 2:
@@ -31,3 +32,7 @@ Plany na przyszłą iteracje:
  
 Jestesmy swiadomi, ze controller sie troche rozrosl i zamierzamy przenisc 
 odpowiedzialnosc executowania taskow do modelu.
+
+Dodatkowo input parser obecnie dziala w przypadku: 1 komenda na 1 linijke. Zostanie to poprawione
+w przyszlej iteracji.
+Istnieje tez maly blad w for loopie.
