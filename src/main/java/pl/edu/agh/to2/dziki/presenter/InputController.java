@@ -18,10 +18,10 @@ public class InputController {
     private TextField textField;
 
     @FXML
-    private Canvas layer1;
+    private Canvas drawLayer;
 
     @FXML
-    private Canvas layer2;
+    private Canvas boarLayer;
 
     @FXML
     private TextArea textArea;
@@ -30,7 +30,7 @@ public class InputController {
 
     @FXML
     public void initialize() {
-        boar = new Boar(layer2);
+        boar = new Boar(new ViewUpdater(boarLayer, drawLayer));
     }
 
     @FXML
@@ -40,14 +40,24 @@ public class InputController {
             textArea.appendText(message + "\n");
             switch (message) {
                 case "start":
-                    boar.initialize(100, 100);
+                    boar.initialize();
                     break;
-                case "rotate":
+                case "r":
                     boar.rotate(10);
                     break;
-                case "rotater":
+                case "rr":
                     boar.rotate(-10);
                     break;
+                case "f":
+                    boar.moveForward(10);
+                    break;
+                case "b":
+                    boar.moveBackward(10);
+                    break;
+                case "h":
+                    boar.hide();
+                    break;
+
             }
 //            TODO commented for testing purposes
 //            textField.clear();

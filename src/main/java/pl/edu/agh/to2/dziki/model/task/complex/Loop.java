@@ -2,7 +2,7 @@ package pl.edu.agh.to2.dziki.model.task.complex;
 
 import pl.edu.agh.to2.dziki.model.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
-import pl.edu.agh.to2.dziki.presenter.BoarViewUpdater;
+import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class Loop implements Task {
     }
 
     @Override
-    public void execute(Boar boar, BoarViewUpdater updater) {
+    public void execute(Boar boar, ViewUpdater updater) {
         for (int i = 0; i < numberOfIterations; i++) {
             nestedTasks.forEach(t -> t.execute(boar, updater));
         }

@@ -19,10 +19,10 @@
                 <Pane fx:id="canvaspane" prefHeight="400.0" prefWidth="200.0"
                       style="-fx-background-color: #f6f6f6; -fx-border-color: #363636; -fx-border-width: 5;">
                     <children>
-                        <Canvas fx:id="layer1" height="390.0" layoutX="5.0" layoutY="5.0" width="1230.0"/>
+                        <Canvas fx:id="drawLayer" height="390.0" layoutX="5.0" layoutY="5.0" width="1230.0"/>
                     </children>
                     <children>
-                        <Canvas fx:id="layer2" height="390.0" layoutX="5.0" layoutY="5.0" width="1230.0"/>
+                        <Canvas fx:id="boarLayer" height="390.0" layoutX="5.0" layoutY="5.0" width="1230.0"/>
                     </children>
                     <VBox.margin>
                         <Insets left="20.0" right="20.0" top="20.0"/>
