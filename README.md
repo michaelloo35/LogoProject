@@ -12,3 +12,19 @@
     * "s": dzik wychodzi z ukrycia
     * "lift": uniesienie dzika
     * "lower": opuszczenie dzika
+
+
+###Milestone 2:
+Założenia:
+* Zaimplementowanie wszystkich komend (oprócz komendy clear) z użyciem wzorca strategia.
+* Zaimplementowanie InputInterpretera odpowiedzialnego za tworzenie list taskow z zwalidowanego już wejscia
+* Dekompocyzja klasy Boar
+* Zaimplementowanie ViewUpdatera odpowiedzialnego za aktualizacje polo zenia dzika na canvasie i rysowani drogi
+
+
+Plany na przyszłą iteracje:
+ * Testy 
+ * Dokumntacja
+ * Diagram klas
+ * Zaimplementowanie historii polecen z użyciem wzorca Command.
+ * Dodanie granic rysowania dla dzika (moze?)
