@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
-import pl.edu.agh.to2.dziki.model.Boar;
+import pl.edu.agh.to2.dziki.model.boar.Boar;
 
 public class ViewUpdater {
 

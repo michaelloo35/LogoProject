@@ -1,8 +1,7 @@
-package pl.edu.agh.to2.dziki.model;
+package pl.edu.agh.to2.dziki.model.boar;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import pl.edu.agh.to2.dziki.presenter.Position;
 import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 import static java.lang.Math.*;

@@ -8,13 +8,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import pl.edu.agh.to2.dziki.model.Boar;
+import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.InputInterpreter;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
 
 import java.util.List;
-import java.util.Stack;
 
 
 public class InputController {

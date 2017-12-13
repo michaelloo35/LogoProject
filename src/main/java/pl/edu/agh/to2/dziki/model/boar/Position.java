@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.presenter;
+package pl.edu.agh.to2.dziki.model.boar;
 
 public class Position {
     private double x;
