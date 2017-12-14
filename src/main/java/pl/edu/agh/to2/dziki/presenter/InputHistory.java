@@ -19,7 +19,10 @@ public class InputHistory {
      * is removed to make a room.
      */
     public void add(String message) {
-        currentIndex = historyStack.add(message);
+        // no need for same message that appeared 10 times in a row as a 10 messages in a history
+        String lastMessage = historyStack.get(historyStack.size() - 1);
+        if (lastMessage == null || !lastMessage.equals(message))
+            currentIndex = historyStack.add(message);
     }
 
     /**
