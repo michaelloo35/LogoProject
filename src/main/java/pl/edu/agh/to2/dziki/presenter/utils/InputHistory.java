@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.presenter;
+package pl.edu.agh.to2.dziki.presenter.utils;
 
 import pl.edu.agh.to2.dziki.utils.EvictingList;
 
@@ -19,10 +19,12 @@ public class InputHistory {
      * is removed to make a room.
      */
     public void add(String message) {
+
         // no need for same message that appeared 10 times in a row as a 10 messages in a history
         String lastMessage = historyStack.get(historyStack.size() - 1);
         if (lastMessage == null || !lastMessage.equals(message))
-            currentIndex = historyStack.add(message);
+            historyStack.add(message);
+        currentIndex = historyStack.size() - 1;
     }
 
     /**

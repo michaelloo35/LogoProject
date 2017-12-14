@@ -12,6 +12,7 @@ import pl.edu.agh.to2.dziki.model.InputInterpreter;
 import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
+import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
 
 import java.util.List;
 
@@ -93,11 +94,15 @@ public class InputController {
             List<Task> tasks = inputInterpreter.interpretAndGenerateTasks(validatedInput);
             executor.executeTasks(tasks);
         } catch (IllegalArgumentException e) {
-            textArea.appendText("******************ERROR******************\n");
-            textArea.appendText(e.getMessage() + "\n");
-            textArea.appendText("******************ERROR******************\n");
+            printUserError(e);
         }
         textField.clear();
+    }
+
+    private void printUserError(IllegalArgumentException e) {
+        textArea.appendText("******************ERROR******************\n");
+        textArea.appendText(e.getMessage() + "\n");
+        textArea.appendText("******************ERROR******************\n");
     }
 
 }
