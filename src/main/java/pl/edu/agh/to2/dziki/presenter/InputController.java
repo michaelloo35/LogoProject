@@ -73,12 +73,14 @@ public class InputController {
     private void arrowDownHandler() {
         String nextMessage;
         if ((nextMessage = history.getNext()) != null) textField.setText(nextMessage);
+        // updating caret position
         Platform.runLater(() -> textField.positionCaret(textField.getText().length()));
     }
 
     private void arrowUpHandler() {
         String previousMessage;
         if ((previousMessage = history.getPrevious()) != null) textField.setText(previousMessage);
+        // updating caret position
         Platform.runLater(() -> textField.positionCaret(textField.getText().length()));
     }
 
