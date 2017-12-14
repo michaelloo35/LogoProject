@@ -1,5 +1,6 @@
 package pl.edu.agh.to2.dziki.presenter;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
@@ -47,6 +48,7 @@ public class InputController {
         boar = new Boar(viewUpdater);
         executor = new TaskExecutor(boar, viewUpdater);
         history = new InputHistory(HISTORY_SIZE);
+
     }
 
     @FXML
@@ -70,14 +72,14 @@ public class InputController {
 
     private void arrowDownHandler() {
         String nextMessage;
-        if ((nextMessage = history.getNext()) != null)
-            textField.setText(nextMessage);
+        if ((nextMessage = history.getNext()) != null) textField.setText(nextMessage);
+        Platform.runLater(() -> textField.positionCaret(textField.getText().length()));
     }
 
     private void arrowUpHandler() {
         String previousMessage;
-        if ((previousMessage = history.getPrevious()) != null)
-            textField.setText(previousMessage);
+        if ((previousMessage = history.getPrevious()) != null) textField.setText(previousMessage);
+        Platform.runLater(() -> textField.positionCaret(textField.getText().length()));
     }
 
     private void enterHandler() {
