@@ -8,8 +8,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.InputInterpreter;
+import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
 
@@ -49,23 +49,26 @@ public class InputController {
     }
 
     @FXML
-    public void onEnter(KeyEvent ke) {
+    public void onKeyPressed(KeyEvent ke) {
         if (ke.getCode().equals(KeyCode.ENTER)) {
-            String message = textField.getText();
-            textArea.appendText(message + "\n");
-            try {
-                List<String> validatedInput = inputParser.parse(message);
-                List<Task> tasks = inputInterpreter.interpretAndGenerateTasks(validatedInput);
-                executor.executeTasks(tasks);
-            }
-            catch (IllegalArgumentException e){
-                textArea.appendText("******************ERROR******************\n");
-                textArea.appendText(e.getMessage() + "\n");
-                textArea.appendText("******************ERROR******************\n");
-            }
-            textField.clear();
+            enterHandler();
         }
 
+    }
+
+    private void enterHandler() {
+        String message = textField.getText();
+        textArea.appendText(message + "\n");
+        try {
+            List<String> validatedInput = inputParser.parse(message);
+            List<Task> tasks = inputInterpreter.interpretAndGenerateTasks(validatedInput);
+            executor.executeTasks(tasks);
+        } catch (IllegalArgumentException e) {
+            textArea.appendText("******************ERROR******************\n");
+            textArea.appendText(e.getMessage() + "\n");
+            textArea.appendText("******************ERROR******************\n");
+        }
+        textField.clear();
     }
 
 }
