@@ -42,9 +42,8 @@ public class InputParser {
             throw new IllegalArgumentException("Incorrect arguments amount");
 
         try {
-            int parsedInt = Integer.parseInt(simpleTask.get(1));
 
-            if (argumentsNumber == 1 && parsedInt <= 0)
+            if (argumentsNumber == 1 && Integer.parseInt(simpleTask.get(1)) <= 0)
                 throw new IllegalArgumentException("Incorrect argument value");
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Incorrect value \"" + simpleTask.get(1) + "\" should be integer");
