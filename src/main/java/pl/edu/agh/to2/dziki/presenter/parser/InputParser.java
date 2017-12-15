@@ -24,7 +24,7 @@ public class InputParser {
         if (input.isEmpty())
             throw new IllegalArgumentException("Command cannot be empty");
 
-        if (!Arrays.asList(Command.getCommandNames()).contains(input.get(0)))
+        if (!Command.getCommandNames().contains(input.get(0)))
             throw new IllegalArgumentException("Task has to start with command name");
 
         if (Command.LOOP.toString().equals(input.get(0)))

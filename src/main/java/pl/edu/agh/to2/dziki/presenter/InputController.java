@@ -1,5 +1,6 @@
 package pl.edu.agh.to2.dziki.presenter;
 
+import com.sun.deploy.util.StringUtils;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -11,10 +12,14 @@ import org.apache.logging.log4j.Logger;
 import pl.edu.agh.to2.dziki.model.InputInterpreter;
 import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
+import pl.edu.agh.to2.dziki.presenter.parser.Command;
 import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
 import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
+import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
 
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 
 public class InputController {
@@ -23,8 +28,9 @@ public class InputController {
     private static final int HISTORY_SIZE = 10;
     private InputParser inputParser;
     private InputInterpreter inputInterpreter;
-    private TaskExecutor executor;
     private InputHistory history;
+    private TextAutoFiller autoFiller;
+    private TaskExecutor executor;
 
     @FXML
     private TextField textField;
@@ -47,8 +53,9 @@ public class InputController {
         inputInterpreter = new InputInterpreter();
         ViewUpdater viewUpdater = new ViewUpdater(boarLayer, drawLayer);
         boar = new Boar(viewUpdater);
-        executor = new TaskExecutor(boar, viewUpdater);
         history = new InputHistory(HISTORY_SIZE);
+        autoFiller = new TextAutoFiller(Command.getCommandNames());
+        executor = new TaskExecutor(boar, viewUpdater);
 
     }
 
@@ -67,7 +74,31 @@ public class InputController {
             case DOWN:
                 arrowDownHandler();
                 break;
+            case TAB:
+                tabHandler();
+                // consuming event in order to disable tab navigation feature
+                ke.consume();
+                break;
         }
+
+    }
+
+    private void tabHandler() {
+        String message;
+        if ((message = textField.getText()).isEmpty())
+            return;
+        String[] words = message.split("\\s+");
+
+        // extracting last word from string since that is what we are trying to auto fill
+        String fillerString;
+
+        if ((fillerString = autoFiller.fillOrGetNextMatch(words[words.length - 1])) == null)
+            return;
+        words[words.length - 1] = fillerString;
+        textField.setText(StringUtils.join(asList(words), " ").toLowerCase());
+
+        // updating caret position
+        Platform.runLater(() -> textField.positionCaret(textField.getText().length()));
 
     }
 

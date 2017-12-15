@@ -1,6 +1,8 @@
 package pl.edu.agh.to2.dziki.presenter.parser;
 
 import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public enum Command {
     FORWARD(1),
@@ -20,7 +22,7 @@ public enum Command {
 
     private final int argumentsNumber;
 
-    Command(int argumentsNumber){
+    Command(int argumentsNumber) {
         this.argumentsNumber = argumentsNumber;
     }
 
@@ -28,7 +30,11 @@ public enum Command {
 
         return argumentsNumber;
     }
-    public static String[] getCommandNames() {
-        return Arrays.stream(Command.class.getEnumConstants()).map(Enum::name).toArray(String[]::new);
+
+    public static Set<String> getCommandNames() {
+        return Arrays
+                .stream(Command.class.getEnumConstants())
+                .map(Enum::name)
+                .collect(Collectors.toSet());
     }
 }
