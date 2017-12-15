@@ -25,6 +25,7 @@ public class AutoFillCyclicBuffer {
 
     public void setBuffer(List<String> elements) {
         this.buffer = elements;
+        this.currentIndex = elements.size() - 1;
     }
 
     public boolean contains(String element) {
