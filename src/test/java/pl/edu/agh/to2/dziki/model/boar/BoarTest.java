@@ -1,12 +1,11 @@
 package pl.edu.agh.to2.dziki.model.boar;
 
-import org.assertj.core.data.Offset;
 import org.junit.Before;
 import org.junit.Test;
 import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.data.Offset.*;
+import static org.assertj.core.data.Offset.offset;
 import static org.mockito.Mockito.mock;
 
 public class BoarTest {
