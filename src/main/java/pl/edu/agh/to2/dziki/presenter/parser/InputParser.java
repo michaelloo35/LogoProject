@@ -46,7 +46,6 @@ public class InputParser {
     }
 
     private void validateSimpleTask(List<String> simpleTask, int argumentsNumber) {
-        System.out.println("*******" + simpleTask + "*********");
         if (simpleTask.size() - 1 != argumentsNumber)
             throw new IllegalArgumentException("Incorrect arguments amount");
 
