@@ -1,5 +1,7 @@
 package pl.edu.agh.to2.dziki.presenter.utils;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,7 +10,7 @@ public class TextAutoFiller {
     private final Set<String> dictionary;
     private final AutoFillCyclicBuffer buffer;
 
-    public TextAutoFiller(Set<String> dictionary) {
+    public TextAutoFiller(@NotNull Set<String> dictionary) {
         this.dictionary = dictionary
                 .stream()
                 .map(String::toUpperCase)
@@ -23,6 +25,8 @@ public class TextAutoFiller {
      * @return null if there are no matches
      */
     public String fillOrGetNextMatch(String word) {
+        if (word.equals(""))
+            return null;
 
         word = word.toUpperCase();
         if (buffer.contains(word))
@@ -31,6 +35,10 @@ public class TextAutoFiller {
             matchPrefix(word);
             return buffer.getNext();
         }
+    }
+
+    public boolean contains(String word) {
+        return buffer.contains(word.toUpperCase());
     }
 
     /**

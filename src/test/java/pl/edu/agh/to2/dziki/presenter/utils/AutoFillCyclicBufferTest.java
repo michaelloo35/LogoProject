@@ -105,6 +105,6 @@ public class AutoFillCyclicBufferTest {
         String result = buffer.getNext();
 
         // then
-        assertThat(result).isEqualTo(null);
+        assertThat(result).isNull();
     }
 }

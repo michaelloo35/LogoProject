@@ -88,6 +88,8 @@ public class InputController {
         if ((message = textField.getText()).isEmpty())
             return;
         String[] words = message.split("\\s+");
+        if (words.length == 0)
+            return;
 
         // extracting last word from string since that is what we are trying to auto fill
         String fillerString;
