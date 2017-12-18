@@ -3,6 +3,9 @@ package pl.edu.agh.to2.dziki.presenter.parser;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+import static java.lang.Double.parseDouble;
+
 public class InputParser {
 
 
@@ -51,10 +54,10 @@ public class InputParser {
             if (Command.ENDLOOP.toString().equals(simpleTask.get(0)))
                 throw new IllegalArgumentException("ENDLOOP cannot start a statement");
             for(int i = 1; i <= argumentsNumber; i++){
-                if(!Command.TURN.toString().equals(simpleTask.get(0)) && Integer.parseInt(simpleTask.get(i)) <= 0)
+                if(!Command.TURN.toString().equals(simpleTask.get(0)) && parseDouble(simpleTask.get(i)) <= 0)
                     throw new IllegalArgumentException("Argument has to be positive value");
                 else
-                    Integer.parseInt(simpleTask.get(i));
+                    parseDouble(simpleTask.get(i));
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Incorrect value \"" + simpleTask.get(1) + "\" should be integer");
@@ -68,7 +71,7 @@ public class InputParser {
         if (!isNumeric(complexTask.get(1)))
             throw new IllegalArgumentException("Loop value has to be a numeric value");
 
-        if (Integer.parseInt(complexTask.get(1)) <= 0)
+        if (parseInt(complexTask.get(1)) <= 0)
             throw new IllegalArgumentException("Loop value has to be a positive value");
 
         if (!Command.ENDLOOP.toString().equals(complexTask.get(complexTask.size() - 1)))

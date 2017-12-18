@@ -25,7 +25,7 @@ public class InputInterpreter {
             if (command.equals(Command.LOOP)) {
                 List<String> forSublist = unwrapLoopStatement(validatedInput, i + 2);
                 skipIterations = forSublist.size() + 2;
-                taskList.add(createLoopTask(validatedInput, parseInt(validatedInput.get(i + 1)), forSublist));
+                taskList.add(createLoopTask(parseInt(validatedInput.get(i + 1)), forSublist));
                 i += skipIterations;
 
             } else {
@@ -81,12 +81,12 @@ public class InputInterpreter {
     /**
      * Transforms more complicated to list of simple tasks
      */
-    private Task createLoopTask(List<String> input, int loopIterations, List<String> simpleTasks) {
+    private Task createLoopTask(int loopIterations, List<String> simpleTasks) {
         List<Task> loopTaskList = new ArrayList<>();
 
         for (int i = 0; i < simpleTasks.size(); i++) {
             Command command = Command.valueOf(simpleTasks.get(i));
-            loopTaskList.add(createSimpleTask(input, command, i + command.getArgumentsNumber()));
+            loopTaskList.add(createSimpleTask(simpleTasks, command, i + command.getArgumentsNumber()));
             i += command.getArgumentsNumber();
         }
         return new Loop(loopIterations, loopTaskList);
@@ -99,7 +99,7 @@ public class InputInterpreter {
         int endIndex = index;
 
         for (int i = index; i < input.size(); i++) {
-            if (input.get(i).toUpperCase().equals("ENDLOOP")) {
+            if (Command.ENDLOOP.toString().equals(input.get(i))) {
                 endIndex = i;
                 break;
             }
