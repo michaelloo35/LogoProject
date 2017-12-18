@@ -9,7 +9,7 @@ zaczynamy program komendą restart
     * backward [wartosc] - porusza sie do przodu o okreslona wartosc
     * left [wartosc] - porusza sie w lewo o okreslona wartosc
     * right [wartosc] - porusza sie w prawo o okreslona wartosc
-    * turn [kąt] obraca dzika o zadany kat
+    * turn [kąt] obraca dzika o zadany kat (dodatni w prawo, ujemny w lewo)
     * hide - dzik się chowa poruszenie wyłania go z ukrycia
     * show - dzik wychodzi z ukrycia
     * lift - uniesienie dzika
