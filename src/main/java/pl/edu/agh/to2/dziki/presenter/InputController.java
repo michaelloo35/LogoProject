@@ -124,13 +124,13 @@ public class InputController {
             List<String> validatedInput = inputParser.parse(message);
             List<Task> tasks = inputInterpreter.interpretAndGenerateTasks(validatedInput);
             executor.executeTasks(tasks);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             printUserError(e);
         }
         textField.clear();
     }
 
-    private void printUserError(IllegalArgumentException e) {
+    private void printUserError(Exception e) {
         textArea.appendText("******************ERROR******************\n");
         textArea.appendText(e.getMessage() + "\n");
         textArea.appendText("******************ERROR******************\n");
