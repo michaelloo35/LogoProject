@@ -37,15 +37,4 @@ public class AutoFillCyclicBufferTest {
         assertThat(buffer.getNext()).isEqualTo(expectedValue);
     }
 
-    @Test
-    public void setBuffer() {
-    }
-
-    @Test
-    public void contains() {
-    }
-
-    @Test
-    public void isEmpty() {
-    }
 }
