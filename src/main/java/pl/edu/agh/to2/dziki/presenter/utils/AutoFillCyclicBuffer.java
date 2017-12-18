@@ -35,4 +35,8 @@ public class AutoFillCyclicBuffer {
     public boolean isEmpty() {
         return buffer.isEmpty();
     }
+
+    public int size() {
+        return buffer.size();
+    }
 }

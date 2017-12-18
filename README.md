@@ -30,8 +30,6 @@ Plany na przyszłą iteracje:
  * Dokumentacja
  * Diagram klas
  * Zaimplementowanie historii polecen z użyciem wzorca Command.
- * Dodanie granic rysowania dla dzika (moze?)
- * Obsługa błędów komunikatami
  
 Jestesmy swiadomi, ze controller sie troche rozrosl o executora, który i zamierzamy przenisc 
 odpowiedzialnosc executowania taskow do modelu.
