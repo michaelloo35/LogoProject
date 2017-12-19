@@ -24,12 +24,13 @@ public class Boar {
 
     public void initialize() {
         setPosition(0, 0, 0);
+        isLift = false;
 
         viewUpdater.updateBoarPosition(this);
     }
 
     private void logPosition() {
-        log.info(String.format(POSITION_MESSAGE, position.getX(), position.getY(), position.getRotation()));
+        log.debug(String.format(POSITION_MESSAGE, position.getX(), position.getY(), position.getRotation()));
     }
 
 
@@ -76,10 +77,10 @@ public class Boar {
             viewUpdater.updateBoarPosition(this);
     }
 
-    public void setPosition(double x, double y, double rotationDegrees) {
+    public void setPosition(double x, double y, double rotationAngle) {
         position.setX(x);
         position.setY(y);
-        position.setRotation(rotationDegrees);
+        position.setRotation(rotationAngle);
 
         logPosition();
         viewUpdater.updateBoarPosition(this);

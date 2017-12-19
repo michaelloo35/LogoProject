@@ -79,21 +79,138 @@ public class BoarTest {
 
     @Test
     public void moveBackward() {
+        // given
+        boar.initialize();
+
+        // when
+        boar.moveBackward(0);           // 0
+        boar.moveBackward(0);           // 0
+        boar.moveBackward(0.4032);      // -0.4032
+        boar.moveBackward(000.111139);  // -0.514339
+        boar.moveBackward(22);          // -22.514339
+        boar.moveBackward(100);         // -122.514339
+        boar.moveBackward(49.321);      // -171.835339
+        boar.moveBackward(12.2);        // -184.035339
+        boar.moveBackward(0);           // -184.035339
+        boar.moveBackward(1);           // -185.035339
+        boar.moveBackward(1);           // -186.035339
+
+        // then
+        assertThat(boar.getPosition().getX()).isEqualTo(-186.035339, offset(EPSILON));
+
     }
 
     @Test
-    public void setPosition() {
+    public void shouldSetCorrectPosition() {
+
+        // given
+        boar.initialize();
+
+        // when
+
+        double x = 134.3;
+        double y = -0.234;
+        int angle = -50;
+
+        boar.setPosition(x, y, angle);
+
+        // normalization
+        angle %= 360;
+        if (angle < 0)
+            angle = 360 + angle;
+
+        // then
+        assertThat(boar.getPosition().getX()).isEqualTo(x, offset(EPSILON));
+        assertThat(boar.getPosition().getY()).isEqualTo(y, offset(EPSILON));
+        assertThat(boar.getPosition().getRotation()).isEqualTo(angle, offset(EPSILON));
+
+    }
+
+
+    @Test
+    public void shouldLift() {
+
+        // given
+        boar.initialize();
+
+        // when
+        boar.lower();
+        boar.lower();
+        boar.lift();
+        boar.lower();
+        boar.lift();
+
+        // then
+        assertThat(boar.isLift()).isTrue();
+
     }
 
     @Test
-    public void getPosition() {
+    public void shouldLower() {
+
+        // given
+        boar.initialize();
+
+        // when
+        boar.lower();
+        boar.lower();
+        boar.lift();
+        boar.lower();
+        boar.lift();
+        boar.lift();
+        boar.lower();
+
+        // then
+        assertThat(boar.isLift()).isFalse();
+
     }
 
     @Test
-    public void lift() {
+    public void shouldBeLoweredOnInitialize() {
+
+        // given
+        boar.initialize();
+
+        // when
+
+        // then
+        assertThat(boar.isLift()).isFalse();
+
     }
 
     @Test
-    public void lower() {
+    public void shouldPerformCorrectComplexMovement() {
+
+        // given
+        boar.initialize();
+        double x = 0.0;
+        double y = 0.0;
+        double rotation = 0.0;
+
+        // when
+        boar.moveForward(100);
+        x += 100;
+        boar.moveBackward(50);
+        x -= 50;
+        boar.rotate(90);
+        rotation += 90;
+        boar.moveForward(100);
+        y += 100;
+        boar.moveBackward(50);
+        y -= 50;
+        boar.rotate(-45);
+        rotation -= 45;
+        boar.moveForward(100);
+        x += 100 * Math.cos(Math.toRadians(45));
+        y += 100 * Math.sin(Math.toRadians(45));
+        boar.moveBackward(50);
+        x -= 50 * Math.cos(Math.toRadians(45));
+        y -= 50 * Math.sin(Math.toRadians(45));
+
+        // then
+        assertThat(boar.getPosition().getX()).isEqualTo(x, offset(EPSILON));
+        assertThat(boar.getPosition().getY()).isEqualTo(y, offset(EPSILON));
+        assertThat(boar.getPosition().getRotation()).isEqualTo(rotation, offset(EPSILON));
+
     }
 }
