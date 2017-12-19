@@ -169,6 +169,7 @@ public class InputParserTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parseIncorrectComplexTest() throws Exception{
+
         //given
         String input = "LOOP 100 FORWARD 20 30 ENDLOOP";
 
@@ -180,6 +181,7 @@ public class InputParserTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parseIncorrectSimpleTest() throws Exception{
+
         //given
         String input = "CLEAR 20";
 
@@ -190,6 +192,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseEmptyInputTest() throws Exception{
+
         //given
         String input = "";
 
@@ -201,6 +204,7 @@ public class InputParserTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void parseUnrecognizableCommandTest() throws Exception{
+
         //given
         String input = "DOWN 20";
 
@@ -211,6 +215,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseUnrecognizableCommandInComplexTaskTest() throws Exception{
+
         //given
         String input = "LOOP 20 FORWARD 10 RIGHT 5 TAB 50 ENDLOOP";
 
@@ -221,6 +226,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseIncorrectArgumentAmount1Test() throws Exception{
+
         //given
         String input = "CIRCLE 5 10";
 
@@ -231,6 +237,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseIncorrectArgumentAmount2Test() throws Exception{
+
         //given
         String input = "LOOP 5 FORWARD 5 CIRCLE 1 2 ENDLOOP";
 
@@ -241,6 +248,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseStartWithEndloopStatementTest() throws Exception{
+
         //given
         String input = "ENDLOOP TURN 50 FORWARD 100";
 
@@ -251,6 +259,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseNegativeIterationsValueTest() throws Exception{
+
         //given
         String input = "LOOP -2 TURN 2 ENDLOOP";
 
@@ -261,6 +270,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseNotClosedLoopStatement1Test() throws Exception{
+
         //given
         String input = "LOOP 10 TURN 2 BACKWARD 20 CIRCLE 5";
 
@@ -271,6 +281,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseNotClosedLoopStatement2Test() throws Exception{
+
         //given
         String input = "LOOP 10 TURN 2 BACKWARD 20 CIRCLE 5 LOOP 5 TURN 5 ENDLOOP";
 
@@ -281,6 +292,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseDecimalIterationValueTest() throws Exception{
+
         //given
         String input = "LOOP 10.5 TURN 2 BACKWARD 20 CIRCLE 5 ENDLOOP";
 
@@ -291,6 +303,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseNegativeCommandValue1Test() throws Exception{
+
         //given
         String input = "LOOP 2 TURN 2 FORWARD -20 ENDLOOP";
 
@@ -301,6 +314,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseIncorrectIterationValueAmountTest() throws Exception{
+
         //given
         String input = "LOOP 5 10 FORWARD 5 CIRCLE 1 2 ENDLOOP";
 
@@ -311,6 +325,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseNegativeCommandValue2Test() throws Exception{
+
         //given
         String input = "CIRCLE -50.5";
 
@@ -321,6 +336,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseNotNumericCommandAttribute1Test() throws Exception{
+
         //given
         String input = "CIRCLE XD";
 
@@ -331,6 +347,7 @@ public class InputParserTest {
     }
     @Test(expected = IllegalArgumentException.class)
     public void parseNotNumericCommandAttribute2Test() throws Exception{
+
         //given
         String input = "LOOP 2 TURN T FORWARD F ENDLOOP";
 

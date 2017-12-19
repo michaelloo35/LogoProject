@@ -24,7 +24,7 @@ public class InputInterpreterTest {
     @Test
     public void interpretAndGenerateSimpleTasks1Test() {
 
-        //give
+        //given
         List<String> validInput = Arrays.asList("FORWARD", "100");
 
         //when
@@ -41,7 +41,7 @@ public class InputInterpreterTest {
     @Test
     public void interpretAndGenerateSimpleTasks2Test() {
 
-        //give
+        //given
         List<String> validInput = Arrays.asList("TURN", "10", "BACKWARD", "5");
 
         //when
@@ -57,7 +57,7 @@ public class InputInterpreterTest {
     @Test
     public void interpretAndGenerateSimpleTasks3Test() {
 
-        //give
+        //given
         List<String> validInput = Arrays.asList("CIRCLE", "10", "HIDE");
 
         //when
@@ -73,7 +73,7 @@ public class InputInterpreterTest {
     @Test
     public void interpretAndGenerateSimpleTasks4Test() {
 
-        //give
+        //given
         List<String> validInput = Arrays.asList("SHOW", "HIDE", "LIFT", "LOWER");
 
         //when
@@ -89,7 +89,7 @@ public class InputInterpreterTest {
     @Test
     public void interpretAndGenerateComplexTasks1Test() {
 
-        //give
+        //given
         List<String> validInput = Arrays.asList("LOOP", "10", "FORWARD", "10", "ENDLOOP");
 
         //when
@@ -105,7 +105,7 @@ public class InputInterpreterTest {
     @Test
     public void interpretAndGenerateComplexTasks2Test() {
 
-        //give
+        //given
         List<String> validInput = Arrays.asList("LOOP", "10", "FORWARD", "10.5", "TURN", "10", "ENDLOOP");
 
         //when
@@ -122,7 +122,7 @@ public class InputInterpreterTest {
     @Test
     public void interpretAndGenerateComplexTasks3Test() {
 
-        //give
+        //given
         List<String> validInput = Arrays.asList("TURN", "10", "LOOP", "10", "FORWARD",
                 "10.5", "TURN", "10", "ENDLOOP", "HIDE");
 
@@ -139,7 +139,8 @@ public class InputInterpreterTest {
 
     @Test
     public void interpretAndGenerateComplexTasks4Test() {
-        //give
+
+        //given
         List<String> validInput = Arrays.asList("LOOP", "10", "FORWARD",
                 "10.5", "TURN", "10", "ENDLOOP", "LOOP", "50", "RIGHT",
                 "123", "CIRCLE", "50.5", "ENDLOOP");

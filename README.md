@@ -34,6 +34,7 @@ Plany:
  * Zagnieżdżanie LOOP'ów
  * (OPCJONALNIE) wczytywanie komend z pliku
  * (OPCJONALNIE) zapisywanie zrzutu rysunku
+ * (OPCJONALNIE) mechanizm aliastow na komendy
  
 
 przykładowe wywołanie:
