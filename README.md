@@ -28,13 +28,17 @@ Co zostało zrobione:
 
 Plany:
  * Więcej testów
- * Poprawienie struktury?
+ * Poprawienie struktury? tutaj mały komentarz, ponieważ nie zauważyliśmy na początku dyskusji w kodzie na gitlabie
+ jedynie tą na samym końcu dlatego dopiero poprawimy te uwagi. Zastanawialiśmy się jakiego mechanizmu użyć do sprawienia
+ że ViewUpdater będzie nasłuchiwał na zmiany dzika Observable? oraz nad tym czy faktycznie InputInterpreter nie jest modelem
+ kiedy zawiera logikę tworzenia tasków z zadanych stringów np. przekształca loopa na listę podtasków.
+ 
  * Dokumentacja (diagram + nazwanie użytych wzorców + javadoci)
  * Zaimplementowanie funkcjonalności przycisku undo z użyciem wzorca Command.
  * Zagnieżdżanie LOOP'ów
  * (OPCJONALNIE) wczytywanie komend z pliku
  * (OPCJONALNIE) zapisywanie zrzutu rysunku
- * (OPCJONALNIE) mechanizm aliastow na komendy
+ * (OPCJONALNIE) mechanizm aliasow na komendy
  
 
 przykładowe wywołanie:
@@ -43,6 +47,7 @@ przykładowe wywołanie:
 * FORWARD 100
 * HIDE
 * SHOW
+* LIFT
 * LIFT
 * FORWARD 300
 * TURN 49

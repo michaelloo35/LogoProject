@@ -147,7 +147,7 @@ public class InputInterpreterTest {
 
         //when
         List<Task> expectedResult = Arrays.asList(new Loop(10,
-                Arrays.asList(new Forward(10), new Turn(10))),
+                        Arrays.asList(new Forward(10), new Turn(10))),
                 new Loop(50, Arrays.asList(new Right(123), new Circle(50.5))));
         List<Task> output = inputInterpreter.interpretAndGenerateTasks(validInput);
 
