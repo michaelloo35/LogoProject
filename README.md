@@ -19,24 +19,22 @@ zaczynamy program komendą restart
 
 ###Milestone 2:
 Co zostało zrobione:
-* Zaimplementowanie wszystkich komend (oprócz komendy clear i circle) z użyciem wzorca strategia.
-* Zaimplementowanie InputInterpretera odpowiedzialnego za tworzenie list taskow z zwalidowanego już wejscia
-* Dekompocyzja klasy Boar
-* Zaimplementowanie ViewUpdatera odpowiedzialnego za aktualizacje polo zenia dzika na canvasie i rysowani drogi
+* Testy najbardziej odpowiedzialnych klas
+* Poprawiona funkcjonalność komendy LOOP
+* Zaimplementowanie historii inputu (za pomocą strzałek góra dół)
+* Zaimplementowania funkcja autouzupełniania komend (za pomocą klawisza tab)
+* Można wpisywać więcej niż 1 komende na 1 linię
 
 
-Plany na przyszłą iteracje:
- * Testy 
- * Dokumentacja
- * Diagram klas
- * Zaimplementowanie historii polecen z użyciem wzorca Command.
+Plany:
+ * Więcej testów
+ * Poprawienie struktury?
+ * Dokumentacja (diagram + nazwanie użytych wzorców + javadoci)
+ * Zaimplementowanie funkcjonalności przycisku undo z użyciem wzorca Command.
+ * Zagnieżdżanie LOOP'ów
+ * (OPCJONALNIE) wczytywanie komend z pliku
+ * (OPCJONALNIE) zapisywanie zrzutu rysunku
  
-Jestesmy swiadomi, ze controller sie troche rozrosl o executora, który i zamierzamy przenisc 
-odpowiedzialnosc executowania taskow do modelu.
-
-Dodatkowo input parser obecnie dziala w przypadku: 1 komenda na 1 linijke. Zostanie to poprawione
-w przyszlej iteracji.
-Istnieje tez maly blad w for loopie.
 
 przykładowe wywołanie:
 * RESTART
@@ -51,5 +49,5 @@ przykładowe wywołanie:
 * LOWER
 * RIGHT 30
 * LOOP 18 TURN 10 FORWARD 15 ENDLOOP
-
-(loop do poprawy)
+* LOOP 10 TURN 5 FORWARD 15 TURN 10 BACKWARD 15 ENDLOOP
+* turn 30 turn -40 forward 100 backward 50 TURN 30 hide show LIFT forward 100 LOWER loop 10 BACKWARD 30 TURN -50 ENDLOOP
