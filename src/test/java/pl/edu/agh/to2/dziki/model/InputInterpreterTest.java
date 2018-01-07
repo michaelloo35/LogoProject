@@ -5,6 +5,7 @@ import org.junit.Test;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.model.task.complex.Loop;
 import pl.edu.agh.to2.dziki.model.task.simple.*;
+import pl.edu.agh.to2.dziki.presenter.InputInterpreter;
 
 import java.util.Arrays;
 import java.util.List;

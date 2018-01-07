@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.model;
+package pl.edu.agh.to2.dziki.presenter;
 
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.model.task.complex.Loop;
