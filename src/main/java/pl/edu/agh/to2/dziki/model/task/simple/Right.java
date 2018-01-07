@@ -6,16 +6,18 @@ import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 public class Right implements Task {
 
-    private double xAxisShift;
+    private final double xAxisShift;
+    private final Boar boar;
 
-    public Right(double xAxisShift){
+    public Right(double xAxisShift, Boar boar) {
         this.xAxisShift = xAxisShift;
+        this.boar = boar;
     }
 
     @Override
-    public void execute(Boar model, ViewUpdater updater) {
-        model.rotate(90.0);
-        model.moveForward(xAxisShift);
+    public void execute(ViewUpdater updater) {
+        boar.rotate(90.0);
+        boar.moveForward(xAxisShift);
     }
 
     @Override

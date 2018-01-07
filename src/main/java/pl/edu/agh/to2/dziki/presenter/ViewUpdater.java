@@ -14,6 +14,7 @@ public class ViewUpdater {
 
     private static final String path = "boar.png";
     private static final int BOAR_SIZE = 100;
+
     /*Since canvas draws an image by its upper left corner we need to subtract little offset in order to
     keep drawn lines in tact with an image*/
     private static final double OFFSET = BOAR_SIZE / 2;
@@ -49,10 +50,6 @@ public class ViewUpdater {
                 startY + OFFSET,
                 boar.getPosition().getX() + OFFSET,
                 boar.getPosition().getY() + OFFSET);
-    }
-
-    public void saveCanvas() {
-        boarLayer.getGraphicsContext2D().save();
     }
 
     public void clearBoarLayer() {

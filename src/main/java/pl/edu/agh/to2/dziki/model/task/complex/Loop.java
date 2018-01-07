@@ -8,18 +8,20 @@ import java.util.List;
 
 public class Loop implements Task {
 
+    private final Boar boar;
     private final int numberOfIterations;
     private final List<Task> nestedTasks;
 
-    public Loop(int numberOfIterations, List<Task> nestedTasks) {
+    public Loop(Boar boar, int numberOfIterations, List<Task> nestedTasks) {
+        this.boar = boar;
         this.numberOfIterations = numberOfIterations;
         this.nestedTasks = nestedTasks;
     }
 
     @Override
-    public void execute(Boar boar, ViewUpdater updater) {
+    public void execute(ViewUpdater updater) {
         for (int i = 0; i < numberOfIterations; i++) {
-            nestedTasks.forEach(t -> t.execute(boar, updater));
+            nestedTasks.forEach(t -> t.execute(updater));
         }
     }
 

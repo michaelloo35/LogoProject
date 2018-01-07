@@ -16,6 +16,6 @@ public class TaskExecutor {
     }
 
     public void executeTasks(List<Task> tasks) {
-        tasks.forEach(task -> task.execute(boar, viewUpdater));
+        tasks.forEach(task -> task.execute(viewUpdater));
     }
 }

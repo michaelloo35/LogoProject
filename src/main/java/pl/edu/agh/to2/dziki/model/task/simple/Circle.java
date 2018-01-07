@@ -7,14 +7,16 @@ import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 public class Circle implements Task {
 
     private double radius;
+    private final Boar boar;
 
-    public Circle(double radius) {
+    public Circle(double radius, Boar boar) {
         this.radius = radius;
+        this.boar = boar;
     }
 
 
     @Override
-    public void execute(Boar model, ViewUpdater updater) {
+    public void execute(ViewUpdater updater) {
 
     }
 

@@ -6,16 +6,17 @@ import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 public class Turn implements Task {
 
-    private double degrees;
+    private final double degrees;
+    private final Boar boar;
 
-    public Turn(double degrees) {
+    public Turn(double degrees, Boar boar) {
         this.degrees = degrees;
+        this.boar = boar;
     }
 
-
     @Override
-    public void execute(Boar model, ViewUpdater updater) {
-        model.rotate(degrees);
+    public void execute(ViewUpdater updater) {
+        boar.rotate(degrees);
     }
 
     @Override

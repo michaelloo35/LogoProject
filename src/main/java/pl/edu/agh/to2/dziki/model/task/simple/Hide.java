@@ -6,9 +6,15 @@ import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 public class Hide implements Task {
 
+    private final Boar boar;
+
+    public Hide(Boar boar) {
+        this.boar = boar;
+    }
+
     @Override
-    public void execute(Boar model, ViewUpdater updater) {
-        model.hide();
+    public void execute(ViewUpdater updater) {
+        boar.hide();
     }
 
     @Override

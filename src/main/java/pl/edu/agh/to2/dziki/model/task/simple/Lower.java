@@ -6,9 +6,15 @@ import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 public class Lower implements Task {
 
+    private final Boar boar;
+
+    public Lower(Boar boar) {
+        this.boar = boar;
+    }
+
     @Override
-    public void execute(Boar model, ViewUpdater updater) {
-        model.lower();
+    public void execute(ViewUpdater updater) {
+        boar.lower();
     }
 
     @Override

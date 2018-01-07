@@ -1,5 +1,6 @@
 package pl.edu.agh.to2.dziki.presenter;
 
+import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.model.task.complex.Loop;
 import pl.edu.agh.to2.dziki.model.task.simple.*;
@@ -14,7 +15,8 @@ import static java.lang.Integer.parseInt;
 
 public class InputInterpreter {
 
-    public List<Task> interpretAndGenerateTasks(List<String> validatedInput) {
+
+    public List<Task> interpretAndGenerateTasks(final Boar boar, List<String> validatedInput) {
 
         List<Task> taskList = new ArrayList<>();
         int skipIterations;
@@ -25,54 +27,54 @@ public class InputInterpreter {
             if (command.equals(Command.LOOP)) {
                 List<String> forSublist = unwrapLoopStatement(validatedInput, i + 2);
                 skipIterations = forSublist.size() + 2;
-                taskList.add(createLoopTask(parseInt(validatedInput.get(i + 1)), forSublist));
+                taskList.add(createLoopTask(boar, parseInt(validatedInput.get(i + 1)), forSublist));
                 i += skipIterations;
 
             } else {
                 skipIterations = command.getArgumentsNumber();
-                taskList.add(createSimpleTask(validatedInput, command, i + skipIterations));
+                taskList.add(createSimpleTask(boar, validatedInput, command, i + skipIterations));
                 i += skipIterations;
             }
         }
         return taskList;
     }
 
-    private Task createSimpleTask(List<String> input, Command command, int commandParameterIndex) {
+    private Task createSimpleTask(final Boar boar, List<String> input, Command command, int commandParameterIndex) {
         Task returnTask = null;
 
         switch (command) {
             case FORWARD:
-                returnTask = new Forward(parseDouble(input.get(commandParameterIndex)));
+                returnTask = new Forward(parseDouble(input.get(commandParameterIndex)), boar);
                 break;
             case BACKWARD:
-                returnTask = new Backward(parseDouble(input.get(commandParameterIndex)));
+                returnTask = new Backward(parseDouble(input.get(commandParameterIndex)), boar);
                 break;
             case RIGHT:
-                returnTask = new Right(parseDouble(input.get(commandParameterIndex)));
+                returnTask = new Right(parseDouble(input.get(commandParameterIndex)), boar);
                 break;
             case LEFT:
-                returnTask = new Left(parseDouble(input.get(commandParameterIndex)));
+                returnTask = new Left(parseDouble(input.get(commandParameterIndex)), boar);
                 break;
             case TURN:
-                returnTask = new Turn(parseDouble(input.get(commandParameterIndex)));
+                returnTask = new Turn(parseDouble(input.get(commandParameterIndex)), boar);
                 break;
             case RESTART:
-                returnTask = new Restart();
+                returnTask = new Restart(boar);
                 break;
             case HIDE:
-                returnTask = new Hide();
+                returnTask = new Hide(boar);
                 break;
             case SHOW:
-                returnTask = new Show();
+                returnTask = new Show(boar);
                 break;
             case LIFT:
-                returnTask = new Lift();
+                returnTask = new Lift(boar);
                 break;
             case LOWER:
-                returnTask = new Lower();
+                returnTask = new Lower(boar);
                 break;
             case CIRCLE:
-                returnTask = new Circle(parseDouble(input.get(commandParameterIndex)));
+                returnTask = new Circle(parseDouble(input.get(commandParameterIndex)), boar);
                 break;
         }
         return returnTask;
@@ -81,15 +83,15 @@ public class InputInterpreter {
     /**
      * Transforms more complicated to list of simple tasks
      */
-    private Task createLoopTask(int loopIterations, List<String> simpleTasks) {
+    private Task createLoopTask(final Boar boar, int loopIterations, List<String> simpleTasks) {
         List<Task> loopTaskList = new ArrayList<>();
 
         for (int i = 0; i < simpleTasks.size(); i++) {
             Command command = Command.valueOf(simpleTasks.get(i));
-            loopTaskList.add(createSimpleTask(simpleTasks, command, i + command.getArgumentsNumber()));
+            loopTaskList.add(createSimpleTask(boar, simpleTasks, command, i + command.getArgumentsNumber()));
             i += command.getArgumentsNumber();
         }
-        return new Loop(loopIterations, loopTaskList);
+        return new Loop(boar, loopIterations, loopTaskList);
     }
 
     /**

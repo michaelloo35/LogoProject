@@ -6,15 +6,17 @@ import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 public class Backward implements Task {
 
-    private double distance;
+    private final double distance;
+    private final Boar boar;
 
-    public Backward(double distance) {
+    public Backward(double distance, Boar boar) {
         this.distance = distance;
+        this.boar = boar;
     }
 
     @Override
-    public void execute(Boar model, ViewUpdater updater) {
-        model.moveBackward(distance);
+    public void execute(ViewUpdater updater) {
+        boar.moveBackward(distance);
     }
 
     @Override

@@ -120,7 +120,7 @@ public class InputController {
         history.add(message);
         try {
             List<String> validatedInput = inputParser.parse(message);
-            List<Task> tasks = inputInterpreter.interpretAndGenerateTasks(validatedInput);
+            List<Task> tasks = inputInterpreter.interpretAndGenerateTasks(boar, validatedInput);
             executor.executeTasks(tasks);
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             printUserError(e);
