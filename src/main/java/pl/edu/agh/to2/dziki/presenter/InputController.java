@@ -1,6 +1,5 @@
 package pl.edu.agh.to2.dziki.presenter;
 
-import com.sun.deploy.util.StringUtils;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -18,8 +17,6 @@ import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
 import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
 
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 
 public class InputController {
@@ -97,7 +94,7 @@ public class InputController {
         if ((fillerString = autoFiller.fillOrGetNextMatch(words[words.length - 1])) == null)
             return;
         words[words.length - 1] = fillerString;
-        textField.setText(StringUtils.join(asList(words), " ").toLowerCase());
+        textField.setText(String.join(" ", words).toLowerCase());
 
         // updating caret position
         Platform.runLater(() -> textField.positionCaret(textField.getText().length()));
