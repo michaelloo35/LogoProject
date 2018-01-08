@@ -23,7 +23,7 @@ public class InputController {
     private static final Logger log = LogManager.getLogger(InputController.class);
     private static final int HISTORY_SIZE = 10;
     private InputParser inputParser;
-    private InputInterpreter inputInterpreter;
+    private TaskCreator taskCreator;
     private InputHistory history;
     private TextAutoFiller autoFiller;
     private TaskExecutor executor;
@@ -46,7 +46,7 @@ public class InputController {
     @FXML
     public void initialize() {
         inputParser = new InputParser();
-        inputInterpreter = new InputInterpreter();
+        taskCreator = new TaskCreator();
         ViewUpdater viewUpdater = new ViewUpdater(boarLayer, drawLayer);
         boar = new Boar(viewUpdater);
         history = new InputHistory(HISTORY_SIZE);
@@ -120,7 +120,7 @@ public class InputController {
         history.add(message);
         try {
             List<String> validatedInput = inputParser.parse(message);
-            List<Task> tasks = inputInterpreter.interpretAndGenerateTasks(boar, validatedInput);
+            List<Task> tasks = taskCreator.interpretAndGenerateTasks(boar, validatedInput);
             executor.executeTasks(tasks);
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             printUserError(e);

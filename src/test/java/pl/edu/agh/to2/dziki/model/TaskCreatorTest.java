@@ -6,7 +6,7 @@ import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.model.task.complex.Loop;
 import pl.edu.agh.to2.dziki.model.task.simple.*;
-import pl.edu.agh.to2.dziki.presenter.InputInterpreter;
+import pl.edu.agh.to2.dziki.presenter.TaskCreator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,14 +15,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 
-public class InputInterpreterTest {
+public class TaskCreatorTest {
 
-    private InputInterpreter inputInterpreter;
+    private TaskCreator taskCreator;
     private Boar boar;
 
     @Before
     public void setUp() {
-        inputInterpreter = new InputInterpreter();
+        taskCreator = new TaskCreator();
         Boar boar = mock(Boar.class);
     }
 
@@ -35,7 +35,7 @@ public class InputInterpreterTest {
 
         //when
         List<Task> expectedResult = Arrays.asList(new Forward(100, boar));
-        List<Task> output = inputInterpreter.interpretAndGenerateTasks(boar, validInput);
+        List<Task> output = taskCreator.interpretAndGenerateTasks(boar, validInput);
 
         //then
         for (int i = 0; i < output.size(); i++)
@@ -52,7 +52,7 @@ public class InputInterpreterTest {
 
         //when
         List<Task> expectedResult = Arrays.asList(new Turn(10, boar), new Backward(5, boar));
-        List<Task> output = inputInterpreter.interpretAndGenerateTasks(boar, validInput);
+        List<Task> output = taskCreator.interpretAndGenerateTasks(boar, validInput);
 
         //then
         for (int i = 0; i < output.size(); i++)
@@ -68,7 +68,7 @@ public class InputInterpreterTest {
 
         //when
         List<Task> expectedResult = Arrays.asList(new Circle(10, boar), new Hide(boar));
-        List<Task> output = inputInterpreter.interpretAndGenerateTasks(boar, validInput);
+        List<Task> output = taskCreator.interpretAndGenerateTasks(boar, validInput);
 
         //then
         for (int i = 0; i < output.size(); i++)
@@ -84,7 +84,7 @@ public class InputInterpreterTest {
 
         //when
         List<Task> expectedResult = Arrays.asList(new Show(boar), new Hide(boar), new Lift(boar), new Lower(boar));
-        List<Task> output = inputInterpreter.interpretAndGenerateTasks(boar, validInput);
+        List<Task> output = taskCreator.interpretAndGenerateTasks(boar, validInput);
 
         //then
         for (int i = 0; i < output.size(); i++)
@@ -100,7 +100,7 @@ public class InputInterpreterTest {
 
         //when
         List<Task> expectedResult = Arrays.asList(new Loop(boar, 10, Arrays.asList(new Forward(10, boar))));
-        List<Task> output = inputInterpreter.interpretAndGenerateTasks(boar, validInput);
+        List<Task> output = taskCreator.interpretAndGenerateTasks(boar, validInput);
 
         //then
         for (int i = 0; i < output.size(); i++)
@@ -117,7 +117,7 @@ public class InputInterpreterTest {
         //when
         List<Task> expectedResult = Arrays.asList(new Loop(boar, 10,
                 Arrays.asList(new Forward(10, boar), new Turn(10, boar))));
-        List<Task> output = inputInterpreter.interpretAndGenerateTasks(boar, validInput);
+        List<Task> output = taskCreator.interpretAndGenerateTasks(boar, validInput);
 
         //then
         for (int i = 0; i < output.size(); i++)
@@ -135,7 +135,7 @@ public class InputInterpreterTest {
         //when
         List<Task> expectedResult = Arrays.asList(new Turn(10, boar), new Loop(boar, 10,
                 Arrays.asList(new Forward(10, boar), new Turn(10, boar))), new Hide(boar));
-        List<Task> output = inputInterpreter.interpretAndGenerateTasks(boar, validInput);
+        List<Task> output = taskCreator.interpretAndGenerateTasks(boar, validInput);
 
         //then
         for (int i = 0; i < output.size(); i++)
@@ -155,7 +155,7 @@ public class InputInterpreterTest {
         List<Task> expectedResult = Arrays.asList(new Loop(boar, 10,
                         Arrays.asList(new Forward(10, boar), new Turn(10, boar))),
                 new Loop(boar, 50, Arrays.asList(new Right(123, boar), new Circle(50.5, boar))));
-        List<Task> output = inputInterpreter.interpretAndGenerateTasks(boar, validInput);
+        List<Task> output = taskCreator.interpretAndGenerateTasks(boar, validInput);
 
         //then
         for (int i = 0; i < output.size(); i++)

@@ -13,7 +13,7 @@ import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 
-public class InputInterpreter {
+public class TaskCreator {
 
 
     public List<Task> interpretAndGenerateTasks(final Boar boar, List<String> validatedInput) {
