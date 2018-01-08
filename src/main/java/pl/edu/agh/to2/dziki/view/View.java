@@ -10,7 +10,7 @@ import java.io.IOException;
 public class View {
 
     private static final String TITLE = "Wildschwein zeichnen";
-    private static final String FXML_FILE_NAME = "test.fxml";
+    private static final String FXML_FILE_NAME = "mainWindow.fxml";
     private Stage primaryStage;
 
     public View(Stage primaryStage) {

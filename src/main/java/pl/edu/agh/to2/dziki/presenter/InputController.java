@@ -1,6 +1,7 @@
 package pl.edu.agh.to2.dziki.presenter;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
@@ -25,9 +26,11 @@ public class InputController {
     private static final int HISTORY_SIZE = 10;
     private InputParser inputParser;
     private TaskCreator taskCreator;
+    private TaskExecutor taskExecutor;
+    private UndoManager undoManager;
     private InputHistory history;
     private TextAutoFiller autoFiller;
-    private TaskExecutor executor;
+
 
     @FXML
     private TextField textField;
@@ -48,9 +51,10 @@ public class InputController {
     public void initialize() {
         inputParser = new InputParser();
         taskCreator = new TaskCreator();
-        executor = new TaskExecutor();
+        taskExecutor = new TaskExecutor();
         ViewUpdater viewUpdater = new ViewUpdater(boarLayer, drawLayer);
         boar = new Boar(viewUpdater);
+        undoManager = new UndoManager(taskExecutor, viewUpdater, boar);
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());
 
@@ -122,7 +126,7 @@ public class InputController {
         try {
             ValidatedInput validatedInput = inputParser.validate(inputParser.parse(message));
             List<Task> tasks = taskCreator.createTaskList(boar, validatedInput);
-            executor.executeTasks(tasks);
+            taskExecutor.executeTasks(tasks);
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             printUserError(e);
         }
@@ -135,4 +139,7 @@ public class InputController {
         textArea.appendText("******************ERROR******************\n");
     }
 
+    public void undoButtonHandler(ActionEvent actionEvent) {
+        undoManager.undo();
+    }
 }

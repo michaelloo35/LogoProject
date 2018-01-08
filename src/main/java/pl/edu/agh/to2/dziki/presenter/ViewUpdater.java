@@ -52,9 +52,17 @@ public class ViewUpdater {
                 boar.getPosition().getY() + OFFSET);
     }
 
+    public void clearDrawLayer() {
+        drawLayer.getGraphicsContext2D().clearRect(0, 0, boarLayer.getWidth(), boarLayer.getHeight());
+    }
+
     public void clearBoarLayer() {
         boarLayer.getGraphicsContext2D().clearRect(0, 0, boarLayer.getWidth(), boarLayer.getHeight());
     }
 
+    public void clearBothLayers() {
+        clearDrawLayer();
+        clearBoarLayer();
+    }
 
 }
