@@ -5,6 +5,7 @@ import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.model.task.complex.Loop;
 import pl.edu.agh.to2.dziki.model.task.simple.*;
 import pl.edu.agh.to2.dziki.presenter.parser.Command;
+import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,24 +17,26 @@ import static java.lang.Integer.parseInt;
 public class TaskCreator {
 
 
-    public List<Task> interpretAndGenerateTasks(final Boar boar, List<String> validatedInput) {
+    public List<Task> createTaskList(final Boar boar, ValidatedInput validatedInput) {
 
         List<Task> taskList = new ArrayList<>();
-        int skipIterations;
+        int numberOfWordsToSkip;
 
-        for (int i = 0; i < validatedInput.size(); i++) {
-            Command command = Command.valueOf(validatedInput.get(i));
+        List<String> validatedInputCopy = validatedInput.getAsList();
+
+        for (int i = 0; i < validatedInputCopy.size(); i++) {
+            Command command = Command.valueOf(validatedInputCopy.get(i));
 
             if (command.equals(Command.LOOP)) {
-                List<String> forSublist = unwrapLoopStatement(validatedInput, i + 2);
-                skipIterations = forSublist.size() + 2;
-                taskList.add(createLoopTask(boar, parseInt(validatedInput.get(i + 1)), forSublist));
-                i += skipIterations;
+                List<String> forSublist = unwrapLoopStatement(validatedInputCopy, i + 2);
+                numberOfWordsToSkip = forSublist.size() + 2;
+                taskList.add(createLoopTask(boar, parseInt(validatedInputCopy.get(i + 1)), forSublist));
+                i += numberOfWordsToSkip;
 
             } else {
-                skipIterations = command.getArgumentsNumber();
-                taskList.add(createSimpleTask(boar, validatedInput, command, i + skipIterations));
-                i += skipIterations;
+                numberOfWordsToSkip = command.getArgumentsNumber();
+                taskList.add(createSimpleTask(boar, validatedInputCopy, command, i + numberOfWordsToSkip));
+                i += numberOfWordsToSkip;
             }
         }
         return taskList;

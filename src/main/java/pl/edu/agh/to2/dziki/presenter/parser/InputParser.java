@@ -3,8 +3,8 @@ package pl.edu.agh.to2.dziki.presenter.parser;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
 import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
 
 public class InputParser {
 
@@ -13,36 +13,37 @@ public class InputParser {
      * Validates and parses input string.
      *
      * @param input read from file or textField as string
-     * @return List of commands and their arguments as List<String>
+     * @return Validated List<String> of commands and their arguments
      */
-    public List<String> parse(String input) {
-        return validate(Arrays.asList(input.split("\\s+")));
+    public ParsedInput parse(String input) {
+        return new ParsedInput(Arrays.asList(input.split("\\s+")));
     }
 
     /**
      * Throws IllegalArgumentException if input is incorrect.
      */
-    private List<String> validate(List<String> input) {
-        input.replaceAll(String::toUpperCase);
-        for (int i = 0; i < input.size(); i++) {
-            if (Command.LOOP.toString().equals(input.get(i))) {
-                List<String> loopSublist = loopSublistExtraction(input, i);
+    public ValidatedInput validate(ParsedInput parsedInput) {
+        List<String> parsedInputCopy = parsedInput.getAsList();
+
+        parsedInputCopy.replaceAll(String::toUpperCase);
+        for (int i = 0; i < parsedInputCopy.size(); i++) {
+            if (Command.LOOP.toString().equals(parsedInputCopy.get(i))) {
+                List<String> loopSublist = loopSublistExtraction(parsedInputCopy, i);
                 validateComplexTask(loopSublist);
                 i += loopSublist.size() - 1;
             } else {
                 int argumentsNumber;
                 try {
-                    argumentsNumber = Command.valueOf(input.get(i)).getArgumentsNumber();
+                    argumentsNumber = Command.valueOf(parsedInputCopy.get(i)).getArgumentsNumber();
+                } catch (IllegalArgumentException e) {
+                    throw new IllegalArgumentException("Unrecognizable command name " + parsedInputCopy.get(i));
                 }
-                catch (IllegalArgumentException e) {
-                    throw new IllegalArgumentException("Unrecognizable command name " + input.get(i));
-                }
-                validateSimpleTask(input.subList(i, i + argumentsNumber + 1), argumentsNumber);
+                validateSimpleTask(parsedInputCopy.subList(i, i + argumentsNumber + 1), argumentsNumber);
                 i += argumentsNumber;
 
             }
         }
-        return input;
+        return new ValidatedInput(parsedInputCopy);
     }
 
     private void validateSimpleTask(List<String> simpleTask, int argumentsNumber) {
@@ -52,8 +53,8 @@ public class InputParser {
         try {
             if (Command.ENDLOOP.toString().equals(simpleTask.get(0)))
                 throw new IllegalArgumentException("ENDLOOP cannot start a statement");
-            for(int i = 1; i <= argumentsNumber; i++){
-                if(!Command.TURN.toString().equals(simpleTask.get(0)) && parseDouble(simpleTask.get(i)) <= 0)
+            for (int i = 1; i <= argumentsNumber; i++) {
+                if (!Command.TURN.toString().equals(simpleTask.get(0)) && parseDouble(simpleTask.get(i)) <= 0)
                     throw new IllegalArgumentException("Argument has to be positive value");
                 else
                     parseDouble(simpleTask.get(i));

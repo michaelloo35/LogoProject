@@ -12,6 +12,7 @@ import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.presenter.parser.Command;
 import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
+import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
 import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
 import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
 
@@ -119,8 +120,8 @@ public class InputController {
         textArea.appendText(message + "\n");
         history.add(message);
         try {
-            List<String> validatedInput = inputParser.parse(message);
-            List<Task> tasks = taskCreator.interpretAndGenerateTasks(boar, validatedInput);
+            ValidatedInput validatedInput = inputParser.validate(inputParser.parse(message));
+            List<Task> tasks = taskCreator.createTaskList(boar, validatedInput);
             executor.executeTasks(tasks);
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             printUserError(e);
