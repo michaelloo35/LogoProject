@@ -46,7 +46,7 @@
                                 <Insets top="5.0" />
                             </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" stylesheets="@stylesheet.css" text="SAVE" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#saveButtonHandler" stylesheets="@stylesheet.css" text="SAVE" textAlignment="CENTER">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="15.0" />
                             </font>

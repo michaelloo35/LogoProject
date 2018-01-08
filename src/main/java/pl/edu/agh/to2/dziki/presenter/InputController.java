@@ -18,8 +18,7 @@ import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
 import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
 import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -148,7 +147,6 @@ public class InputController {
         textArea.appendText("******************ERROR******************\n");
     }
     private void setupFileChooser(){
-        fileChooser.setTitle("Choose LOGO script");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("TXT", "*.txt")
@@ -160,7 +158,7 @@ public class InputController {
     }
 
     public void fileButtonHandler(){
-        textArea.appendText("***************FILE PARSING**************\n");
+        fileChooser.setTitle("Choose LOGO script");
         File selectedFile = fileChooser.showOpenDialog(null);
         if(selectedFile != null){
             try(Stream<String> file = Files.lines(Paths.get(selectedFile.toURI()))){
@@ -175,5 +173,25 @@ public class InputController {
             }
         }
         textArea.appendText("*************PARSING FINISHED*************\n");
+    }
+
+    public void saveButtonHandler(){
+        fileChooser.setTitle("Save file");
+        File selectedFile = fileChooser.showSaveDialog(null);
+        if(selectedFile != null){
+            try(FileWriter fileWriter = new FileWriter(selectedFile, true);
+                BufferedReader reader = new BufferedReader(new StringReader(textArea.getText()))
+            ){
+                String line = reader.readLine();
+                while(line != null){
+                    fileWriter.write(line + System.getProperty("line.separator"));
+                    line = reader.readLine();
+                }
+            }
+            catch (IOException e){
+                printUserError(e);
+            }
+        }
+        textArea.appendText("******************SAVED*******************\n");
     }
 }
