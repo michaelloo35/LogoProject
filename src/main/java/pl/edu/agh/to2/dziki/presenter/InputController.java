@@ -7,6 +7,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.edu.agh.to2.dziki.model.boar.Boar;
@@ -17,7 +18,12 @@ import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
 import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
 import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 public class InputController {
@@ -30,6 +36,7 @@ public class InputController {
     private UndoManager undoManager;
     private InputHistory history;
     private TextAutoFiller autoFiller;
+    private FileChooser fileChooser;
 
 
     @FXML
@@ -57,6 +64,8 @@ public class InputController {
         undoManager = new UndoManager(taskExecutor, viewUpdater, boar);
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());
+        fileChooser = new FileChooser();
+        setupFileChooser();
 
     }
 
@@ -138,8 +147,33 @@ public class InputController {
         textArea.appendText(e.getMessage() + "\n");
         textArea.appendText("******************ERROR******************\n");
     }
+    private void setupFileChooser(){
+        fileChooser.setTitle("Choose LOGO script");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("TXT", "*.txt")
+        );
+    }
 
     public void undoButtonHandler(ActionEvent actionEvent) {
         undoManager.undo();
+    }
+
+    public void fileButtonHandler(){
+        textArea.appendText("***************FILE PARSING**************\n");
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if(selectedFile != null){
+            try(Stream<String> file = Files.lines(Paths.get(selectedFile.toURI()))){
+                for(String line : (Iterable<String>) file::iterator){
+                    ValidatedInput validatedInput = inputParser.validate(inputParser.parse(line));
+                    List<Task> tasks = taskCreator.createTaskList(boar, validatedInput);
+                    taskExecutor.executeTasks(tasks);
+                }
+            }
+            catch (IOException | IllegalArgumentException | IndexOutOfBoundsException e){
+                printUserError(e);
+            }
+        }
+        textArea.appendText("*************PARSING FINISHED*************\n");
     }
 }

@@ -38,7 +38,7 @@
                 <HBox prefHeight="73.0" prefWidth="1239.0" spacing="10.0">
                     <children>
                         <Pane opacity="0.0" prefHeight="34.0" prefWidth="1038.0" />
-                        <Button mnemonicParsing="false" stylesheets="@stylesheet.css" text="FILE" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#fileButtonHandler" stylesheets="@stylesheet.css" text="FILE" textAlignment="CENTER">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="15.0" />
                             </font>
@@ -54,7 +54,7 @@
                                 <Insets top="5.0" />
                             </HBox.margin>
                         </Button>
-                        <Button onAction="#undoButtonHandler" mnemonicParsing="false" prefHeight="29.0" prefWidth="66.0" stylesheets="@stylesheet.css" text="UNDO" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#undoButtonHandler" prefHeight="29.0" prefWidth="66.0" stylesheets="@stylesheet.css" text="UNDO" textAlignment="CENTER">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="15.0" />
                             </font>
