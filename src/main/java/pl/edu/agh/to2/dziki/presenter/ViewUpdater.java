@@ -1,5 +1,7 @@
 package pl.edu.agh.to2.dziki.presenter;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
@@ -9,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import pl.edu.agh.to2.dziki.model.boar.Boar;
 
-public class ViewUpdater {
+public class ViewUpdater implements Observer<Boar> {
 
 
     private static final String path = "boar.png";
@@ -22,10 +24,11 @@ public class ViewUpdater {
     private final Canvas boarLayer;
     private final Canvas drawLayer;
 
-    public ViewUpdater(Canvas boarLayer, Canvas drawLayer) {
+    public ViewUpdater(Canvas boarLayer, Canvas drawLayer, Boar boar) {
         this.boarLayer = boarLayer;
         this.drawLayer = drawLayer;
         this.image = new Image(getClass().getClassLoader().getResourceAsStream(path), BOAR_SIZE, BOAR_SIZE, false, true);
+        boar.subscribe(this);
     }
 
     public void updateBoarPosition(Boar boar) {
@@ -34,22 +37,25 @@ public class ViewUpdater {
         // setting up rotation
         ImageView iv = new ImageView(image);
         SnapshotParameters params = new SnapshotParameters();
-        params.setTransform(new Rotate(boar.getPosition().getRotation(), image.getHeight() / 2, image.getWidth() / 2));
+        params.setTransform(new Rotate(boar.getCurrentPosition().getRotation(), image.getHeight() / 2, image.getWidth() / 2));
         params.setViewport(new Rectangle2D(0, 0, image.getWidth() + BOAR_SIZE / 2, image.getHeight()));
         params.setFill(Color.TRANSPARENT);
         Image rotatedImage = iv.snapshot(params, null);
 
-        boarLayer.getGraphicsContext2D().drawImage(rotatedImage, boar.getPosition().getX(), boar.getPosition().getY());
+        boarLayer.getGraphicsContext2D().drawImage(rotatedImage, boar.getCurrentPosition().getX(), boar.getCurrentPosition().getY());
     }
 
-    public void moveAndDraw(Boar boar, double startX, double startY) {
+    public void drawLine(Boar boar) {
+
+        double startX = boar.getPreviousPosition().getX();
+        double startY = boar.getPreviousPosition().getY();
 
         // adding image offset to keep image in tact with drawn lines
         drawLayer.getGraphicsContext2D().strokeLine(
                 startX + OFFSET,
                 startY + OFFSET,
-                boar.getPosition().getX() + OFFSET,
-                boar.getPosition().getY() + OFFSET);
+                boar.getCurrentPosition().getX() + OFFSET,
+                boar.getCurrentPosition().getY() + OFFSET);
     }
 
     public void clearDrawLayer() {
@@ -65,4 +71,36 @@ public class ViewUpdater {
         clearBoarLayer();
     }
 
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    /**
+     * React to boar state-change events
+     *
+     * @param boar
+     */
+    @Override
+    public void onNext(Boar boar) {
+
+        if (!boar.isHidden())
+            updateBoarPosition(boar);
+        else
+            clearBoarLayer();
+
+        if (!boar.isLift() && !boar.getPreviousPosition().hasSameCoordinatesAs(boar.getCurrentPosition()))
+            drawLine(boar);
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
 }

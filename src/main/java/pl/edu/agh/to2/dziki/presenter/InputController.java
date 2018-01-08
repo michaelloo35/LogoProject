@@ -58,8 +58,8 @@ public class InputController {
         inputParser = new InputParser();
         taskCreator = new TaskCreator();
         taskExecutor = new TaskExecutor();
-        ViewUpdater viewUpdater = new ViewUpdater(boarLayer, drawLayer);
-        boar = new Boar(viewUpdater);
+        boar = new Boar();
+        ViewUpdater viewUpdater = new ViewUpdater(boarLayer, drawLayer, boar);
         undoManager = new UndoManager(taskExecutor, viewUpdater, boar);
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());

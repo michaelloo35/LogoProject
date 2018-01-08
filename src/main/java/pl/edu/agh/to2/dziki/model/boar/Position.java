@@ -37,4 +37,8 @@ public class Position {
         if (this.rotation < 0)
             this.rotation += 360;
     }
+
+    public boolean hasSameCoordinatesAs(Position p) {
+        return x == p.getX() && y == p.getY();
+    }
 }
