@@ -52,7 +52,7 @@ public class InputController {
         boar = new Boar(viewUpdater);
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());
-        executor = new TaskExecutor(boar, viewUpdater);
+        executor = new TaskExecutor(viewUpdater);
 
     }
 

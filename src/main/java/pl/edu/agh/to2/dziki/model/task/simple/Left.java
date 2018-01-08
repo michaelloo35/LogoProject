@@ -2,7 +2,6 @@ package pl.edu.agh.to2.dziki.model.task.simple;
 
 import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
-import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 public class Left implements Task {
 
@@ -15,7 +14,7 @@ public class Left implements Task {
     }
 
     @Override
-    public void execute(ViewUpdater updater) {
+    public void execute() {
         boar.rotate(-90.0);
         boar.moveForward(xAxisShift);
     }
