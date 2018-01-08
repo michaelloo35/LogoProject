@@ -48,11 +48,11 @@ public class InputController {
     public void initialize() {
         inputParser = new InputParser();
         taskCreator = new TaskCreator();
+        executor = new TaskExecutor();
         ViewUpdater viewUpdater = new ViewUpdater(boarLayer, drawLayer);
         boar = new Boar(viewUpdater);
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());
-        executor = new TaskExecutor(viewUpdater);
 
     }
 

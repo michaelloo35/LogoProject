@@ -6,13 +6,7 @@ import java.util.List;
 
 public class TaskExecutor {
 
-    private final ViewUpdater viewUpdater;
-
-    public TaskExecutor(ViewUpdater viewUpdater) {
-        this.viewUpdater = viewUpdater;
-    }
-
     public void executeTasks(List<Task> tasks) {
-        tasks.forEach(task -> task.execute());
+        tasks.forEach(Task::execute);
     }
 }
