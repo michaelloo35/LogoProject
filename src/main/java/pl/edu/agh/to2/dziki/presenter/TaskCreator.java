@@ -58,9 +58,11 @@ public class TaskCreator {
             case LEFT:
                 returnTask = new Left(parseDouble(input.get(commandParameterIndex)), boar);
                 break;
+            case ROTATE:
             case TURN:
                 returnTask = new Turn(parseDouble(input.get(commandParameterIndex)), boar);
                 break;
+            case START:
             case RESTART:
                 returnTask = new Restart(boar);
                 break;

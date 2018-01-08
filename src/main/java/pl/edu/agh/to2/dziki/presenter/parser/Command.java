@@ -4,13 +4,14 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+// Alias commands by convention should be written in same line. When adding an alias case condition in TaskCreator shall be updated
 public enum Command {
     FORWARD(1),
     BACKWARD(1),
     RIGHT(1),
     LEFT(1),
-    TURN(1),
-    RESTART(0),
+    TURN(1), ROTATE(1),
+    RESTART(0), START(0),
     HIDE(0),
     SHOW(0),
     CLEAR(0),
