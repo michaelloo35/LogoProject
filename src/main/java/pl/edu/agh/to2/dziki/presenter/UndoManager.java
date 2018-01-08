@@ -25,8 +25,7 @@ public class UndoManager {
         taskExecutor.executeUnregisteredTask(new Restart(boar));
         try {
             taskExecutor.popTaskFromHistory();
-        }
-        catch (EmptyStackException e){
+        } catch (EmptyStackException e) {
             log.debug("There are no tasks in history");
         }
         taskExecutor.executeTasksHistory();

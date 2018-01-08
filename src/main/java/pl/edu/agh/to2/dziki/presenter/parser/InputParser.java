@@ -54,7 +54,10 @@ public class InputParser {
             if (Command.ENDLOOP.toString().equals(simpleTask.get(0)))
                 throw new IllegalArgumentException("ENDLOOP cannot start a statement");
             for (int i = 1; i <= argumentsNumber; i++) {
-                if (!Command.TURN.toString().equals(simpleTask.get(0)) && parseDouble(simpleTask.get(i)) <= 0)
+                if (!Command.TURN.toString().equals(simpleTask.get(0))
+                        || !Command.ROTATE.toString().equals(simpleTask.get(0))
+                        && parseDouble(simpleTask.get(i)) <= 0)
+
                     throw new IllegalArgumentException("Argument has to be positive value");
                 else
                     parseDouble(simpleTask.get(i));

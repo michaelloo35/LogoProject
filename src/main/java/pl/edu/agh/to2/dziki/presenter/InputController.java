@@ -146,7 +146,8 @@ public class InputController {
         textArea.appendText(e.getMessage() + "\n");
         textArea.appendText("******************ERROR******************\n");
     }
-    private void setupFileChooser(){
+
+    private void setupFileChooser() {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("TXT", "*.txt")
@@ -157,38 +158,36 @@ public class InputController {
         undoManager.undo();
     }
 
-    public void fileButtonHandler(){
+    public void fileButtonHandler() {
         fileChooser.setTitle("Choose LOGO script");
         File selectedFile = fileChooser.showOpenDialog(null);
-        if(selectedFile != null){
-            try(Stream<String> file = Files.lines(Paths.get(selectedFile.toURI()))){
-                for(String line : (Iterable<String>) file::iterator){
+        if (selectedFile != null) {
+            try (Stream<String> file = Files.lines(Paths.get(selectedFile.toURI()))) {
+                for (String line : (Iterable<String>) file::iterator) {
                     ValidatedInput validatedInput = inputParser.validate(inputParser.parse(line));
                     List<Task> tasks = taskCreator.createTaskList(boar, validatedInput);
                     taskExecutor.executeTasks(tasks);
                 }
-            }
-            catch (IOException | IllegalArgumentException | IndexOutOfBoundsException e){
+            } catch (IOException | IllegalArgumentException | IndexOutOfBoundsException e) {
                 printUserError(e);
             }
         }
         textArea.appendText("*************PARSING FINISHED*************\n");
     }
 
-    public void saveButtonHandler(){
+    public void saveButtonHandler() {
         fileChooser.setTitle("Save file");
         File selectedFile = fileChooser.showSaveDialog(null);
-        if(selectedFile != null){
-            try(FileWriter fileWriter = new FileWriter(selectedFile, true);
-                BufferedReader reader = new BufferedReader(new StringReader(textArea.getText()))
-            ){
+        if (selectedFile != null) {
+            try (FileWriter fileWriter = new FileWriter(selectedFile, true);
+                 BufferedReader reader = new BufferedReader(new StringReader(textArea.getText()))
+            ) {
                 String line = reader.readLine();
-                while(line != null){
+                while (line != null) {
                     fileWriter.write(line + System.getProperty("line.separator"));
                     line = reader.readLine();
                 }
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 printUserError(e);
             }
         }
