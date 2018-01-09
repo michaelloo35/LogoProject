@@ -37,7 +37,15 @@
             <children>
                 <HBox prefHeight="73.0" prefWidth="1239.0" spacing="10.0">
                     <children>
-                        <Pane opacity="0.0" prefHeight="34.0" prefWidth="1038.0" />
+                  <Button mnemonicParsing="false" onAction="#helpButtonHandler" stylesheets="@stylesheet.css" text="HELP" textAlignment="CENTER">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                        <Pane opacity="0.0" prefHeight="34.0" prefWidth="972.0" stylesheets="@stylesheet.css" />
                         <Button mnemonicParsing="false" onAction="#fileButtonHandler" stylesheets="@stylesheet.css" text="FILE" textAlignment="CENTER">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="15.0" />

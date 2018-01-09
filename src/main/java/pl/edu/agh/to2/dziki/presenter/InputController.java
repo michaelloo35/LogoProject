@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -192,5 +193,13 @@ public class InputController {
             }
         }
         textArea.appendText("******************SAVED*******************\n");
+    }
+
+    public void helpButtonHandler(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(Helper.getTITLE());
+        alert.setHeaderText(Helper.getHEADER());
+        alert.setContentText(Helper.getCONTENT());
+        alert.showAndWait();
     }
 }
