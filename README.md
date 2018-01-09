@@ -57,3 +57,7 @@ przykładowe wywołanie:
 * LOOP 18 TURN 10 FORWARD 15 ENDLOOP
 * LOOP 10 TURN 5 FORWARD 15 TURN 10 BACKWARD 15 ENDLOOP
 * turn 30 turn -40 forward 100 backward 50 TURN 30 hide show LIFT forward 100 LOWER loop 10 BACKWARD 30 TURN -50 ENDLOOP
+* 
+
+##### Link do opisu:
+https://docs.google.com/document/d/1EMJtLbAl9lzvuE-uNd-yKWUKt_6gvhSghgfLAnARzuI/edit
