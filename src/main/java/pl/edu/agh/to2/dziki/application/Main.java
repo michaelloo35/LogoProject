@@ -2,6 +2,7 @@ package pl.edu.agh.to2.dziki.application;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pl.edu.agh.to2.dziki.view.View;
 
 public class Main extends Application {
@@ -12,6 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.initStyle(StageStyle.UTILITY);
         View view = new View(primaryStage);
         view.showStage();
     }
