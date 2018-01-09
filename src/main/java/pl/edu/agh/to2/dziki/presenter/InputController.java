@@ -16,6 +16,10 @@ import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.presenter.parser.Command;
 import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
 import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
+import pl.edu.agh.to2.dziki.presenter.task.TaskCreator;
+import pl.edu.agh.to2.dziki.presenter.task.TaskExecutor;
+import pl.edu.agh.to2.dziki.presenter.undo.UndoManager;
+import pl.edu.agh.to2.dziki.presenter.utils.Helper;
 import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
 import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
 
@@ -37,6 +41,7 @@ public class InputController {
     private InputHistory history;
     private TextAutoFiller autoFiller;
     private FileChooser fileChooser;
+    private Boar boar;
 
 
     @FXML
@@ -51,7 +56,6 @@ public class InputController {
     @FXML
     private TextArea textArea;
 
-    private Boar boar;
 
 
     @FXML
@@ -195,7 +199,7 @@ public class InputController {
         textArea.appendText("******************SAVED*******************\n");
     }
 
-    public void helpButtonHandler(){
+    public void helpButtonHandler() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(Helper.getTITLE());
         alert.setHeaderText(Helper.getHEADER());

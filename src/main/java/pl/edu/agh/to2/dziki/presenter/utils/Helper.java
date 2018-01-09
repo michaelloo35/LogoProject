@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.presenter;
+package pl.edu.agh.to2.dziki.presenter.utils;
 
 public class Helper {
     private static final String TITLE = "USER MANUAL";

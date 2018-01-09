@@ -1,9 +1,11 @@
-package pl.edu.agh.to2.dziki.presenter;
+package pl.edu.agh.to2.dziki.presenter.undo;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.simple.Restart;
+import pl.edu.agh.to2.dziki.presenter.task.TaskExecutor;
+import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
 import java.util.EmptyStackException;
 

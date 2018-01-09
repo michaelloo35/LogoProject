@@ -6,7 +6,7 @@ import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.model.task.complex.Loop;
 import pl.edu.agh.to2.dziki.model.task.simple.*;
-import pl.edu.agh.to2.dziki.presenter.TaskCreator;
+import pl.edu.agh.to2.dziki.presenter.task.TaskCreator;
 import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
 
 import java.util.Arrays;

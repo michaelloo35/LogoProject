@@ -93,7 +93,19 @@ public class Boar implements ObservableSource<Boar> {
 
     }
 
-    public void setPreviousPosition(double x, double y, double rotationAngle) {
+    public void lift() {
+        isLift = true;
+    }
+
+    public void lower() {
+        isLift = false;
+    }
+
+    public boolean isLift() {
+        return isLift;
+    }
+
+    private void setPreviousPosition(double x, double y, double rotationAngle) {
         previousPosition.setX(x);
         previousPosition.setY(y);
         previousPosition.setRotation(rotationAngle);
@@ -117,18 +129,6 @@ public class Boar implements ObservableSource<Boar> {
 
     public Position getPreviousPosition() {
         return previousPosition;
-    }
-
-    public boolean isLift() {
-        return isLift;
-    }
-
-    public void lift() {
-        isLift = true;
-    }
-
-    public void lower() {
-        isLift = false;
     }
 
     @Override

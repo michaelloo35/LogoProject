@@ -14,7 +14,7 @@ import pl.edu.agh.to2.dziki.model.boar.Boar;
 public class ViewUpdater implements Observer<Boar> {
 
 
-    private static final String path = "boar.png";
+    private static final String BOAR_IMAGE_PATH = "boar.png";
     private static final int BOAR_SIZE = 100;
 
     /*Since canvas draws an image by its upper left corner we need to subtract little offset in order to
@@ -27,11 +27,11 @@ public class ViewUpdater implements Observer<Boar> {
     public ViewUpdater(Canvas boarLayer, Canvas drawLayer, Boar boar) {
         this.boarLayer = boarLayer;
         this.drawLayer = drawLayer;
-        this.image = new Image(getClass().getClassLoader().getResourceAsStream(path), BOAR_SIZE, BOAR_SIZE, false, true);
+        this.image = new Image(getClass().getClassLoader().getResourceAsStream(BOAR_IMAGE_PATH), BOAR_SIZE, BOAR_SIZE, false, true);
         boar.subscribe(this);
     }
 
-    public void updateBoarPosition(Boar boar) {
+    private void updateBoarPosition(Boar boar) {
         clearBoarLayer();
 
         // setting up rotation
@@ -45,7 +45,7 @@ public class ViewUpdater implements Observer<Boar> {
         boarLayer.getGraphicsContext2D().drawImage(rotatedImage, boar.getCurrentPosition().getX(), boar.getCurrentPosition().getY());
     }
 
-    public void drawLine(Boar boar) {
+    private void drawLine(Boar boar) {
 
         double startX = boar.getPreviousPosition().getX();
         double startY = boar.getPreviousPosition().getY();
@@ -58,11 +58,11 @@ public class ViewUpdater implements Observer<Boar> {
                 boar.getCurrentPosition().getY() + OFFSET);
     }
 
-    public void clearDrawLayer() {
+    private void clearDrawLayer() {
         drawLayer.getGraphicsContext2D().clearRect(0, 0, boarLayer.getWidth(), boarLayer.getHeight());
     }
 
-    public void clearBoarLayer() {
+    private void clearBoarLayer() {
         boarLayer.getGraphicsContext2D().clearRect(0, 0, boarLayer.getWidth(), boarLayer.getHeight());
     }
 

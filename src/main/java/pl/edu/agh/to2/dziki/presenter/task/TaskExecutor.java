@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.presenter;
+package pl.edu.agh.to2.dziki.presenter.task;
 
 import pl.edu.agh.to2.dziki.model.task.Task;
 
