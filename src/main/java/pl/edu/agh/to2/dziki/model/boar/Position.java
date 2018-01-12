@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.dziki.viewModel;
+package pl.edu.agh.to2.dziki.model.boar;
 
 public class Position {
     private double x;
@@ -25,11 +25,20 @@ public class Position {
         return rotation;
     }
 
-    public void setRotation(double rotation) {
-        this.rotation = rotation % 360;
+    public void setRotation(double angle) {
+        this.rotation = 0;
+        rotate(angle);
     }
 
     public void rotate(double angle) {
         this.rotation = (this.rotation + angle) % 360;
+
+        // normalization
+        if (this.rotation < 0)
+            this.rotation += 360;
+    }
+
+    public boolean hasSameCoordinatesAs(Position p) {
+        return x == p.getX() && y == p.getY();
     }
 }
