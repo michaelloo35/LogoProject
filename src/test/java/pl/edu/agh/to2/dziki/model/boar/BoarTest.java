@@ -25,9 +25,9 @@ public class BoarTest {
         boar.initialize();
 
         //then
-        assertThat(boar.getCurrentPosition().getX()).isEqualTo(0.0, offset(EPSILON));
-        assertThat(boar.getCurrentPosition().getY()).isEqualTo(0.0, offset(EPSILON));
-        assertThat(boar.getCurrentPosition().getRotation()).isEqualTo(0.0, offset(EPSILON));
+        assertThat(boar.getPosition().getX()).isEqualTo(0.0, offset(EPSILON));
+        assertThat(boar.getPosition().getY()).isEqualTo(0.0, offset(EPSILON));
+        assertThat(boar.getPosition().getRotation()).isEqualTo(0.0, offset(EPSILON));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class BoarTest {
         boar.rotate(730);   // 260.799
 
         // then
-        assertThat(boar.getCurrentPosition().getRotation()).isEqualTo(260.799, offset(EPSILON));
+        assertThat(boar.getPosition().getRotation()).isEqualTo(260.799, offset(EPSILON));
 
     }
 
@@ -71,7 +71,7 @@ public class BoarTest {
         boar.moveForward(1);        // 545.84419
 
         // then
-        assertThat(boar.getCurrentPosition().getX()).isEqualTo(545.84419, offset(EPSILON));
+        assertThat(boar.getPosition().getX()).isEqualTo(545.84419, offset(EPSILON));
 
     }
 
@@ -94,7 +94,7 @@ public class BoarTest {
         boar.moveBackward(1);           // -186.035339
 
         // then
-        assertThat(boar.getCurrentPosition().getX()).isEqualTo(-186.035339, offset(EPSILON));
+        assertThat(boar.getPosition().getX()).isEqualTo(-186.035339, offset(EPSILON));
 
     }
 
@@ -118,9 +118,9 @@ public class BoarTest {
             angle = 360 + angle;
 
         // then
-        assertThat(boar.getCurrentPosition().getX()).isEqualTo(x, offset(EPSILON));
-        assertThat(boar.getCurrentPosition().getY()).isEqualTo(y, offset(EPSILON));
-        assertThat(boar.getCurrentPosition().getRotation()).isEqualTo(angle, offset(EPSILON));
+        assertThat(boar.getPosition().getX()).isEqualTo(x, offset(EPSILON));
+        assertThat(boar.getPosition().getY()).isEqualTo(y, offset(EPSILON));
+        assertThat(boar.getPosition().getRotation()).isEqualTo(angle, offset(EPSILON));
 
     }
 
@@ -206,9 +206,9 @@ public class BoarTest {
         y -= 50 * Math.sin(Math.toRadians(45));
 
         // then
-        assertThat(boar.getCurrentPosition().getX()).isEqualTo(x, offset(EPSILON));
-        assertThat(boar.getCurrentPosition().getY()).isEqualTo(y, offset(EPSILON));
-        assertThat(boar.getCurrentPosition().getRotation()).isEqualTo(rotation, offset(EPSILON));
+        assertThat(boar.getPosition().getX()).isEqualTo(x, offset(EPSILON));
+        assertThat(boar.getPosition().getY()).isEqualTo(y, offset(EPSILON));
+        assertThat(boar.getPosition().getRotation()).isEqualTo(rotation, offset(EPSILON));
 
     }
 }

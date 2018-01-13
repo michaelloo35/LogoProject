@@ -1,7 +1,5 @@
 package pl.edu.agh.to2.dziki.presenter;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
@@ -10,8 +8,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import pl.edu.agh.to2.dziki.model.boar.Boar;
+import pl.edu.agh.to2.dziki.model.boar.BoarActionData;
+import pl.edu.agh.to2.dziki.model.boar.BoarObserver;
 
-public class ViewUpdater implements Observer<Boar> {
+public class ViewUpdater implements BoarObserver {
 
 
     private static final String BOAR_IMAGE_PATH = "boar.png";
@@ -31,31 +31,29 @@ public class ViewUpdater implements Observer<Boar> {
         boar.subscribe(this);
     }
 
-    private void updateBoarPosition(Boar boar) {
+    private void updateBoarPosition(BoarActionData data) {
         clearBoarLayer();
 
         // setting up rotation
         ImageView iv = new ImageView(image);
         SnapshotParameters params = new SnapshotParameters();
-        params.setTransform(new Rotate(boar.getCurrentPosition().getRotation(), image.getHeight() / 2, image.getWidth() / 2));
+        params.setTransform(new Rotate(data.getNewPosition().getRotation(), image.getHeight() / 2, image.getWidth() / 2));
         params.setViewport(new Rectangle2D(0, 0, image.getWidth() + BOAR_SIZE / 2, image.getHeight()));
         params.setFill(Color.TRANSPARENT);
         Image rotatedImage = iv.snapshot(params, null);
 
-        boarLayer.getGraphicsContext2D().drawImage(rotatedImage, boar.getCurrentPosition().getX(), boar.getCurrentPosition().getY());
+        boarLayer.getGraphicsContext2D().drawImage(rotatedImage, data.getNewPosition().getX(), data.getNewPosition().getY());
     }
 
-    private void drawLine(Boar boar) {
+    private void drawLine(BoarActionData data) {
 
-        double startX = boar.getPreviousPosition().getX();
-        double startY = boar.getPreviousPosition().getY();
 
         // adding image offset to keep image in tact with drawn lines
         drawLayer.getGraphicsContext2D().strokeLine(
-                startX + OFFSET,
-                startY + OFFSET,
-                boar.getCurrentPosition().getX() + OFFSET,
-                boar.getCurrentPosition().getY() + OFFSET);
+                data.getPreviousPosition().getX() + OFFSET,
+                data.getPreviousPosition().getY() + OFFSET,
+                data.getNewPosition().getX() + OFFSET,
+                data.getNewPosition().getY() + OFFSET);
     }
 
     private void clearDrawLayer() {
@@ -72,35 +70,32 @@ public class ViewUpdater implements Observer<Boar> {
     }
 
     @Override
-    public void onSubscribe(Disposable d) {
-
-    }
-
-    /**
-     * React to boar state-change events
-     *
-     * @param boar
-     */
-    @Override
-    public void onNext(Boar boar) {
-
-        if (!boar.isHidden())
-            updateBoarPosition(boar);
-        else
-            clearBoarLayer();
-
-        if (!boar.isLift() && !boar.getPreviousPosition().hasSameCoordinatesAs(boar.getCurrentPosition()))
-            drawLine(boar);
-
+    public void onRotate(BoarActionData data) {
+        if (!data.isHidden())
+            updateBoarPosition(data);
     }
 
     @Override
-    public void onError(Throwable e) {
+    public void onMove(BoarActionData data) {
+        if (!data.isLift())
+            drawLine(data);
 
+        if (!data.isHidden())
+            updateBoarPosition(data);
     }
 
     @Override
-    public void onComplete() {
+    public void onHide() {
+        clearBoarLayer();
+    }
 
+    @Override
+    public void onShow(BoarActionData data) {
+        updateBoarPosition(data);
+    }
+
+    @Override
+    public void onInitialize(BoarActionData data) {
+        updateBoarPosition(data);
     }
 }

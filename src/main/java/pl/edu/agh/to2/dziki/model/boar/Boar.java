@@ -1,7 +1,6 @@
 package pl.edu.agh.to2.dziki.model.boar;
 
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
+import com.google.common.annotations.VisibleForTesting;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,54 +14,60 @@ import static java.lang.Math.*;
  * when Boar's current position is equal to his previous position no line shall be drawn
  * this means that the boar 'teleported' instead of moving
  */
-public class Boar implements ObservableSource<Boar> {
+public class Boar implements ObservableBoar {
 
     private static final Logger log = LogManager.getLogger(Boar.class);
-    private static final String POSITION_MESSAGE = "Boar currentPosition set to x: %.2f y: %.2f angle: %.2f degrees";
+    private static final String POSITION_MESSAGE = "Boar position set to x: %.2f y: %.2f angle: %.2f degrees";
 
-    private final Position previousPosition;
-    private final Position currentPosition;
-    private List<Observer<Boar>> observers;
+    private final Position position;
+    private List<BoarObserver> observers;
     private boolean isLift;
     private boolean isHidden;
 
     public Boar() {
-        previousPosition = new Position();
-        this.currentPosition = new Position();
+        this.position = new Position();
         this.observers = new ArrayList<>();
         this.isLift = false;
         this.isHidden = false;
     }
 
     public void initialize() {
-        setPreviousPosition(0, 0, 0);
         setCurrentPosition(0, 0, 0);
         isLift = false;
         isHidden = false;
 
-        observers.forEach(o -> o.onNext(this));
+        observers.forEach(o -> o.onInitialize(
+                new BoarActionData(
+                        new Position(position),
+                        new Position(position),
+                        isLift, isHidden)));
     }
 
     private void logPosition() {
-        log.debug(String.format(POSITION_MESSAGE, currentPosition.getX(), currentPosition.getY(), currentPosition.getRotation()));
+        log.debug(String.format(POSITION_MESSAGE, position.getX(), position.getY(), position.getRotation()));
     }
 
 
     public void rotate(double degrees) {
-        setPreviousPosition(currentPosition.getX(), currentPosition.getY(), currentPosition.getRotation());
 
-        currentPosition.rotate(degrees);
-        observers.forEach(o -> o.onNext(this));
+        Position previousPosition = new Position(position);
+        position.rotate(degrees);
+        Position newPosition = new Position(position);
+
+        observers.forEach(o -> o.onRotate(
+                new BoarActionData(previousPosition, newPosition, isLift, isHidden)));
     }
 
     public void hide() {
         isHidden = true;
-        observers.forEach(o -> o.onNext(this));
+        observers.forEach(BoarObserver::onHide);
     }
 
     public void show() {
+        Position previousPosition = new Position(position);
         isHidden = false;
-        observers.forEach(o -> o.onNext(this));
+        Position newPosition = new Position(position);
+        observers.forEach(o -> o.onShow(new BoarActionData(previousPosition, newPosition, isLift, isHidden)));
     }
 
     public boolean isHidden() {
@@ -71,25 +76,35 @@ public class Boar implements ObservableSource<Boar> {
 
     public void moveForward(double distance) {
 
-        setPreviousPosition(currentPosition.getX(), currentPosition.getY(), currentPosition.getRotation());
+        Position previousPosition = new Position(position);
+        double startX = position.getX();
+        double startY = position.getY();
 
-        double newX = previousPosition.getX() + cos(toRadians(previousPosition.getRotation())) * distance;
-        double newY = previousPosition.getY() + sin(toRadians(previousPosition.getRotation())) * distance;
+        double newX = startX + cos(toRadians(position.getRotation())) * distance;
+        double newY = startY + sin(toRadians(position.getRotation())) * distance;
 
-        setCurrentPosition(newX, newY, currentPosition.getRotation());
-        observers.forEach(o -> o.onNext(this));
+        setCurrentPosition(newX, newY, position.getRotation());
+        Position newPosition = new Position(position);
+
+        observers.forEach(o -> o.onMove(
+                new BoarActionData(previousPosition, newPosition, isLift, isHidden)));
 
     }
 
     public void moveBackward(double distance) {
 
-        setPreviousPosition(currentPosition.getX(), currentPosition.getY(), currentPosition.getRotation());
+        Position previousPosition = new Position(position);
+        double startX = position.getX();
+        double startY = position.getY();
 
-        double newX = previousPosition.getX() - cos(toRadians(previousPosition.getRotation())) * distance;
-        double newY = previousPosition.getY() - sin(toRadians(previousPosition.getRotation())) * distance;
+        double newX = startX - cos(toRadians(position.getRotation())) * distance;
+        double newY = startY - sin(toRadians(position.getRotation())) * distance;
 
-        setCurrentPosition(newX, newY, currentPosition.getRotation());
-        observers.forEach(o -> o.onNext(this));
+        setCurrentPosition(newX, newY, position.getRotation());
+        Position newPosition = new Position(position);
+
+        observers.forEach(o -> o.onMove(
+                new BoarActionData(previousPosition, newPosition, isLift, isHidden)));
 
     }
 
@@ -105,34 +120,21 @@ public class Boar implements ObservableSource<Boar> {
         return isLift;
     }
 
-    private void setPreviousPosition(double x, double y, double rotationAngle) {
-        previousPosition.setX(x);
-        previousPosition.setY(y);
-        previousPosition.setRotation(rotationAngle);
-    }
-
-    public void setCurrentPosition(double x, double y, double rotationAngle) {
-        currentPosition.setX(x);
-        currentPosition.setY(y);
-        currentPosition.setRotation(rotationAngle);
+    @VisibleForTesting
+    void setCurrentPosition(double x, double y, double rotationAngle) {
+        position.setX(x);
+        position.setY(y);
+        position.setRotation(rotationAngle);
 
         logPosition();
     }
 
-    public Position getCurrentPosition() {
-        return currentPosition;
-    }
-
-    /**
-     * If boar moves he remembers his previous currentPosition
-     */
-
-    public Position getPreviousPosition() {
-        return previousPosition;
+    public Position getPosition() {
+        return position;
     }
 
     @Override
-    public void subscribe(Observer observer) {
-        observers.add(observer);
+    public void subscribe(BoarObserver observer) {
+        this.observers.add(observer);
     }
 }

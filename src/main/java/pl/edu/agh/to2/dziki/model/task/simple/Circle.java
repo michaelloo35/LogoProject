@@ -19,8 +19,4 @@ public class Circle implements Task {
 
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

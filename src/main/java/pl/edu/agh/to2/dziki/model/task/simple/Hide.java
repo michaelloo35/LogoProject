@@ -16,8 +16,4 @@ public class Hide implements Task {
         boar.hide();
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

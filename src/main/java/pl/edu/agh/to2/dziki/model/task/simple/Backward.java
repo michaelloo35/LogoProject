@@ -18,8 +18,4 @@ public class Backward implements Task {
         boar.moveBackward(distance);
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

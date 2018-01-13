@@ -16,8 +16,4 @@ public class Restart implements Task {
         boar.initialize();
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

@@ -16,8 +16,4 @@ public class Lift implements Task {
         boar.lift();
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

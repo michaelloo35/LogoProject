@@ -16,8 +16,4 @@ public class Lower implements Task {
         boar.lower();
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

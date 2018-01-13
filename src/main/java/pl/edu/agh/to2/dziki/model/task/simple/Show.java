@@ -16,8 +16,4 @@ public class Show implements Task {
         boar.show();
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

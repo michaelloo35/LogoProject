@@ -96,7 +96,7 @@ public class TaskCreator {
             loopTaskList.add(createSimpleTask(boar, simpleTasks, command, i + command.getArgumentsNumber()));
             i += command.getArgumentsNumber();
         }
-        return new Loop(boar, loopIterations, loopTaskList);
+        return new Loop(loopIterations, loopTaskList);
     }
 
     /**
