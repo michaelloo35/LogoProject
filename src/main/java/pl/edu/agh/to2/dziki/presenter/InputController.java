@@ -17,8 +17,7 @@ import pl.edu.agh.to2.dziki.presenter.parser.Command;
 import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
 import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
 import pl.edu.agh.to2.dziki.presenter.task.TaskCreator;
-import pl.edu.agh.to2.dziki.presenter.task.TaskExecutor;
-import pl.edu.agh.to2.dziki.presenter.undo.UndoManager;
+import pl.edu.agh.to2.dziki.presenter.undo.TaskExecutor;
 import pl.edu.agh.to2.dziki.presenter.utils.Helper;
 import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
 import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
@@ -37,7 +36,6 @@ public class InputController {
     private InputParser inputParser;
     private TaskCreator taskCreator;
     private TaskExecutor taskExecutor;
-    private UndoManager undoManager;
     private InputHistory history;
     private TextAutoFiller autoFiller;
     private FileChooser fileChooser;
@@ -57,15 +55,13 @@ public class InputController {
     private TextArea textArea;
 
 
-
     @FXML
     public void initialize() {
         inputParser = new InputParser();
         taskCreator = new TaskCreator();
-        taskExecutor = new TaskExecutor();
         boar = new Boar();
         ViewUpdater viewUpdater = new ViewUpdater(boarLayer, drawLayer, boar);
-        undoManager = new UndoManager(taskExecutor, viewUpdater, boar);
+        taskExecutor = new TaskExecutor(viewUpdater, boar);
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());
         fileChooser = new FileChooser();
@@ -160,7 +156,7 @@ public class InputController {
     }
 
     public void undoButtonHandler(ActionEvent actionEvent) {
-        undoManager.undo();
+        taskExecutor.undo();
     }
 
     public void fileButtonHandler() {
