@@ -5,23 +5,22 @@ import org.apache.logging.log4j.Logger;
 import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.model.task.simple.Restart;
-import pl.edu.agh.to2.dziki.presenter.ViewUpdater;
 
-import java.util.EmptyStackException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class TaskExecutor {
+public class TaskExecutor implements ObservableTaskExecutor {
 
     private static final Logger log = LogManager.getLogger(TaskExecutor.class);
     private final Stack<Task> tasksHistory;
-    private final ViewUpdater viewUpdater;
+    private final List<TaskExecutorObserver> observers;
     private final Boar boar;
 
-    public TaskExecutor(ViewUpdater viewUpdater, Boar boar) {
-        this.viewUpdater = viewUpdater;
+    public TaskExecutor(Boar boar) {
         this.boar = boar;
-        tasksHistory = new Stack<>();
+        this.tasksHistory = new Stack<>();
+        this.observers = new ArrayList<>();
     }
 
     public void executeTasks(List<Task> tasks) {
@@ -34,22 +33,12 @@ public class TaskExecutor {
     }
 
     public void undo() {
-        viewUpdater.clearBothLayers();
         new Restart(boar).execute();
-        try {
-            popTaskFromHistory();
-            executeTasksHistory();
-            log.debug("Undo completed");
-        } catch (EmptyStackException e) {
-            log.debug("Can't pop stack any task. History is empty");
-        }
+        observers.forEach(o -> o.onUndo(tasksHistory));
     }
 
-    private void executeTasksHistory() {
-        tasksHistory.forEach(Task::execute);
-    }
-
-    private Task popTaskFromHistory() {
-        return tasksHistory.pop();
+    @Override
+    public void subscribe(TaskExecutorObserver observer) {
+        this.observers.add(observer);
     }
 }

@@ -60,8 +60,8 @@ public class InputController {
         inputParser = new InputParser();
         taskCreator = new TaskCreator();
         boar = new Boar();
-        ViewUpdater viewUpdater = new ViewUpdater(boarLayer, drawLayer, boar);
-        taskExecutor = new TaskExecutor(viewUpdater, boar);
+        taskExecutor = new TaskExecutor(boar);
+        new ViewUpdater(boarLayer, drawLayer, boar, taskExecutor);
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());
         fileChooser = new FileChooser();

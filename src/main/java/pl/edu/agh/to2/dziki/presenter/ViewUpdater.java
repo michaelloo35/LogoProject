@@ -7,13 +7,21 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
-import pl.edu.agh.to2.dziki.model.boar.Boar;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.edu.agh.to2.dziki.model.boar.BoarActionData;
 import pl.edu.agh.to2.dziki.model.boar.BoarObserver;
+import pl.edu.agh.to2.dziki.model.boar.ObservableBoar;
+import pl.edu.agh.to2.dziki.model.task.Task;
+import pl.edu.agh.to2.dziki.presenter.undo.ObservableTaskExecutor;
+import pl.edu.agh.to2.dziki.presenter.undo.TaskExecutorObserver;
 
-public class ViewUpdater implements BoarObserver {
+import java.util.EmptyStackException;
+import java.util.Stack;
 
+public class ViewUpdater implements BoarObserver, TaskExecutorObserver {
 
+    private static final Logger log = LogManager.getLogger(ViewUpdater.class);
     private static final String BOAR_IMAGE_PATH = "boar.png";
     private static final int BOAR_SIZE = 100;
 
@@ -24,11 +32,12 @@ public class ViewUpdater implements BoarObserver {
     private final Canvas boarLayer;
     private final Canvas drawLayer;
 
-    public ViewUpdater(Canvas boarLayer, Canvas drawLayer, Boar boar) {
+    public ViewUpdater(Canvas boarLayer, Canvas drawLayer, ObservableBoar boar, ObservableTaskExecutor taskExecutor) {
         this.boarLayer = boarLayer;
         this.drawLayer = drawLayer;
         this.image = new Image(getClass().getClassLoader().getResourceAsStream(BOAR_IMAGE_PATH), BOAR_SIZE, BOAR_SIZE, false, true);
         boar.subscribe(this);
+        taskExecutor.subscribe(this);
     }
 
     private void updateBoarPosition(BoarActionData data) {
@@ -97,5 +106,19 @@ public class ViewUpdater implements BoarObserver {
     @Override
     public void onInitialize(BoarActionData data) {
         updateBoarPosition(data);
+    }
+
+    @Override
+    public void onUndo(Stack<Task> tasksHistory) {
+        clearBothLayers();
+        try {
+            tasksHistory.pop();
+            tasksHistory.forEach(Task::execute);
+            log.debug("Undo completed");
+
+        } catch (EmptyStackException e) {
+            log.debug("Can't pop stack any task. History is empty");
+        }
+
     }
 }
