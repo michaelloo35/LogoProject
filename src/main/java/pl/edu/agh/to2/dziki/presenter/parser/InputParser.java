@@ -38,6 +38,9 @@ public class InputParser {
                 } catch (IllegalArgumentException e) {
                     throw new IllegalArgumentException("Unrecognizable command name " + parsedInputCopy.get(i));
                 }
+                // ensure that there are at least as many nodes(words) as arguments count for given command
+                if(parsedInputCopy.size() < i + argumentsNumber + 1)
+                    throw new IllegalArgumentException("Incorrect arguments amount");
                 validateSimpleTask(parsedInputCopy.subList(i, i + argumentsNumber + 1), argumentsNumber);
                 i += argumentsNumber;
 
@@ -47,9 +50,6 @@ public class InputParser {
     }
 
     private void validateSimpleTask(List<String> simpleTask, int argumentsNumber) {
-        if (simpleTask.size() - 1 != argumentsNumber)
-            throw new IllegalArgumentException("Incorrect arguments amount");
-
         try {
             if (Command.ENDLOOP.toString().equals(simpleTask.get(0)))
                 throw new IllegalArgumentException("ENDLOOP cannot start a statement");
