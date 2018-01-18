@@ -1,7 +1,5 @@
 package pl.edu.agh.to2.dziki.presenter.utils;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,7 +8,7 @@ public class TextAutoFiller {
     private final Set<String> dictionary;
     private final AutoFillCyclicBuffer buffer;
 
-    public TextAutoFiller(@NotNull Set<String> dictionary) {
+    public TextAutoFiller(Set<String> dictionary) {
         this.dictionary = dictionary
                 .stream()
                 .map(String::toUpperCase)

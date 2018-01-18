@@ -1,7 +1,5 @@
 package pl.edu.agh.to2.dziki.presenter.utils;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class AutoFillCyclicBuffer {
         return element;
     }
 
-    public void setBuffer(@NotNull List<String> elements) {
+    public void setBuffer(List<String> elements) {
         this.buffer = elements;
         this.currentIndex = 0;
     }
