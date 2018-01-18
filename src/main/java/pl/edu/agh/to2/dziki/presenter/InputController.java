@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
+import pl.edu.agh.to2.dziki.model.task.simple.Restart;
 import pl.edu.agh.to2.dziki.presenter.parser.Command;
 import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
 import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
@@ -25,6 +26,7 @@ import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -60,13 +62,29 @@ public class InputController {
         inputParser = new InputParser();
         taskCreator = new TaskCreator();
         boar = new Boar();
-        taskExecutor = new TaskExecutor(boar);
+
+        // setup boar initialization
+        List<Task> setupTasks = boarSetupTasks();
+
+        taskExecutor = new TaskExecutor(setupTasks.size());
         new ViewUpdater(boarLayer, drawLayer, boar, taskExecutor);
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());
         fileChooser = new FileChooser();
         setupFileChooser();
 
+        // initialize boar
+        taskExecutor.executeTasks(setupTasks);
+
+    }
+
+    /**
+     * @return List of tasks to be executed on application startup to setup initial boar state
+     */
+    private List<Task> boarSetupTasks() {
+        List<Task> initializationTasks = new ArrayList<>();
+        initializationTasks.add(new Restart((boar)));
+        return initializationTasks;
     }
 
     @FXML

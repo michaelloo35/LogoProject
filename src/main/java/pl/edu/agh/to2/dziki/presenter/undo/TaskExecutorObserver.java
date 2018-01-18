@@ -1,9 +1,8 @@
 package pl.edu.agh.to2.dziki.presenter.undo;
 
 import pl.edu.agh.to2.dziki.model.task.Task;
-
-import java.util.Stack;
+import pl.edu.agh.to2.dziki.utils.UnmodifiableList;
 
 public interface TaskExecutorObserver {
-    void onUndo(Stack<Task> tasksHistory);
+    void onUndo(UnmodifiableList<Task> tasksHistory);
 }

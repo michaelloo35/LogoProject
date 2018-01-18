@@ -15,9 +15,9 @@ import pl.edu.agh.to2.dziki.model.boar.ObservableBoar;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.presenter.undo.ObservableTaskExecutor;
 import pl.edu.agh.to2.dziki.presenter.undo.TaskExecutorObserver;
+import pl.edu.agh.to2.dziki.utils.UnmodifiableList;
 
 import java.util.EmptyStackException;
-import java.util.Stack;
 
 public class ViewUpdater implements BoarObserver, TaskExecutorObserver {
 
@@ -109,10 +109,9 @@ public class ViewUpdater implements BoarObserver, TaskExecutorObserver {
     }
 
     @Override
-    public void onUndo(Stack<Task> tasksHistory) {
+    public void onUndo(UnmodifiableList<Task> tasksHistory) {
         clearBothLayers();
         try {
-            tasksHistory.pop();
             tasksHistory.forEach(Task::execute);
             log.debug("Undo completed");
 
