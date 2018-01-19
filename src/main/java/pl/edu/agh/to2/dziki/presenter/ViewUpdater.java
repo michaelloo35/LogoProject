@@ -3,6 +3,7 @@ package pl.edu.agh.to2.dziki.presenter;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -27,7 +28,7 @@ public class ViewUpdater implements BoarObserver, TaskExecutorObserver {
 
     /*Since canvas draws an image by its upper left corner we need to subtract little offset in order to
     keep drawn lines in tact with an image*/
-    private static final double OFFSET = BOAR_SIZE / 2;
+    private static final double BOAR_TEXTURE_OFFSET = BOAR_SIZE / 2;
     private final Image image;
     private final Canvas boarLayer;
     private final Canvas drawLayer;
@@ -59,10 +60,10 @@ public class ViewUpdater implements BoarObserver, TaskExecutorObserver {
 
         // adding image offset to keep image in tact with drawn lines
         drawLayer.getGraphicsContext2D().strokeLine(
-                data.getPreviousPosition().getX() + OFFSET,
-                data.getPreviousPosition().getY() + OFFSET,
-                data.getNewPosition().getX() + OFFSET,
-                data.getNewPosition().getY() + OFFSET);
+                data.getPreviousPosition().getX() + BOAR_TEXTURE_OFFSET,
+                data.getPreviousPosition().getY() + BOAR_TEXTURE_OFFSET,
+                data.getNewPosition().getX() + BOAR_TEXTURE_OFFSET,
+                data.getNewPosition().getY() + BOAR_TEXTURE_OFFSET);
     }
 
     private void clearDrawLayer() {
@@ -111,6 +112,24 @@ public class ViewUpdater implements BoarObserver, TaskExecutorObserver {
     @Override
     public void onClear() {
         clearDrawLayer();
+    }
+
+    @Override
+    public void onRectangle(BoarActionData data, double width, double height) {
+        GraphicsContext gc = drawLayer.getGraphicsContext2D();
+        gc.setFill(Color.BLACK);
+        gc.fillRect(
+                data.getNewPosition().getX() + BOAR_TEXTURE_OFFSET,
+                data.getNewPosition().getY() + BOAR_TEXTURE_OFFSET, width, height);
+    }
+
+    @Override
+    public void onCircle(BoarActionData data, double radius) {
+        GraphicsContext gc = drawLayer.getGraphicsContext2D();
+        gc.setFill(Color.BLACK);
+        gc.fillOval(
+                data.getNewPosition().getX() + BOAR_TEXTURE_OFFSET,
+                data.getNewPosition().getY() + BOAR_TEXTURE_OFFSET, 2 * radius, 2 * radius);
     }
 
     @Override

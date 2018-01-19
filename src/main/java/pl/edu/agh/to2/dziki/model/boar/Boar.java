@@ -104,6 +104,23 @@ public class Boar implements ObservableBoar {
 
     }
 
+    public void fillRectangle(double width, double height) {
+        Position previousPosition = new Position(position);
+        Position newPosition = new Position(position);
+
+        observers.forEach(o -> o.onRectangle(
+                new BoarActionData(previousPosition, newPosition, isLift, isHidden), width, height));
+    }
+
+    public void fillCircle(double radius) {
+        Position previousPosition = new Position(position);
+        Position newPosition = new Position(position);
+
+        observers.forEach(o -> o.onCircle(
+                new BoarActionData(previousPosition, newPosition, isLift, isHidden), radius));
+    }
+
+
     public void lift() {
         isLift = true;
     }

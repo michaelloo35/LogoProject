@@ -12,4 +12,9 @@ public interface BoarObserver {
     void onInitialize(BoarActionData data);
 
     void onClear();
+
+    void onRectangle(BoarActionData data, double width, double height);
+
+    void onCircle(BoarActionData data, double radius);
+
 }
