@@ -7,7 +7,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.edu.agh.to2.dziki.model.boar.Boar;
@@ -18,18 +17,12 @@ import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
 import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
 import pl.edu.agh.to2.dziki.presenter.task.TaskCreator;
 import pl.edu.agh.to2.dziki.presenter.undo.TaskExecutor;
-import pl.edu.agh.to2.dziki.presenter.utils.Helper;
-import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
-import pl.edu.agh.to2.dziki.presenter.utils.SnapshotManager;
-import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
+import pl.edu.agh.to2.dziki.presenter.utils.*;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 public class InputController {
@@ -41,7 +34,7 @@ public class InputController {
     private TaskExecutor taskExecutor;
     private InputHistory history;
     private TextAutoFiller autoFiller;
-    private FileChooser fileChooser;
+    private ScriptLoader scriptLoader;
     private SnapshotManager snapshotManager;
     private Helper helper;
     private Boar boar;
@@ -73,10 +66,9 @@ public class InputController {
         new ViewUpdater(boarLayer, drawLayer, boar, taskExecutor);
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());
-        fileChooser = new FileChooser();
+        scriptLoader = new ScriptLoader(inputParser, taskCreator, taskExecutor, boar);
         snapshotManager = new SnapshotManager(drawLayer);
         helper = new Helper();
-        setupFileChooser();
 
         // initialize boar
         taskExecutor.executeTasks(setupTasks);
@@ -155,6 +147,7 @@ public class InputController {
         String message = textField.getText();
         textArea.appendText(message + "\n");
         history.add(message);
+
         try {
             ValidatedInput validatedInput = inputParser.validate(inputParser.parse(message));
             List<Task> tasks = taskCreator.createTaskList(boar, validatedInput);
@@ -162,6 +155,7 @@ public class InputController {
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             printUserError(e);
         }
+
         textField.clear();
     }
 
@@ -171,32 +165,18 @@ public class InputController {
         textArea.appendText("******************ERROR******************\n");
     }
 
-    private void setupFileChooser() {
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("TXT", "*.txt")
-        );
-    }
-
     public void undoButtonHandler(ActionEvent actionEvent) {
         taskExecutor.undo();
     }
 
     public void fileButtonHandler() {
-        fileChooser.setTitle("Choose LOGO script");
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            try (Stream<String> file = Files.lines(Paths.get(selectedFile.toURI()))) {
-                for (String line : (Iterable<String>) file::iterator) {
-                    ValidatedInput validatedInput = inputParser.validate(inputParser.parse(line));
-                    List<Task> tasks = taskCreator.createTaskList(boar, validatedInput);
-                    taskExecutor.executeTasks(tasks);
-                }
-            } catch (IOException | IllegalArgumentException | IndexOutOfBoundsException e) {
-                printUserError(e);
-            }
+        try {
+            scriptLoader.load();
+            textArea.appendText("*************Script executed*************\n");
         }
-        textArea.appendText("*************PARSING FINISHED*************\n");
+        catch (ParseException e){
+            printUserError(e);
+        }
     }
 
     public void snapshotButtonHandler() {

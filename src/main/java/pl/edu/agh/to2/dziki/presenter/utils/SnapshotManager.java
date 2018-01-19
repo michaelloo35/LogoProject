@@ -24,6 +24,7 @@ public class SnapshotManager {
         // choose location for the image
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save snapshot");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG", "*.png"));
         File file = fileChooser.showSaveDialog(null);
 
