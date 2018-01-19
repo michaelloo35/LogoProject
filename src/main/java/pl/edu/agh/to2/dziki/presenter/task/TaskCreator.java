@@ -72,6 +72,9 @@ public class TaskCreator {
             case SHOW:
                 returnTask = new Show(boar);
                 break;
+            case CLEAR:
+                returnTask = new Clear(boar);
+                break;
             case LIFT:
                 returnTask = new Lift(boar);
                 break;

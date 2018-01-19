@@ -109,6 +109,11 @@ public class ViewUpdater implements BoarObserver, TaskExecutorObserver {
     }
 
     @Override
+    public void onClear() {
+        clearDrawLayer();
+    }
+
+    @Override
     public void onUndo(UnmodifiableList<Task> tasksHistory) {
         clearBothLayers();
         try {

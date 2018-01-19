@@ -10,4 +10,6 @@ public interface BoarObserver {
     void onShow(BoarActionData data);
 
     void onInitialize(BoarActionData data);
+
+    void onClear();
 }

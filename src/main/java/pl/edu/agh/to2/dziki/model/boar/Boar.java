@@ -70,10 +70,6 @@ public class Boar implements ObservableBoar {
         observers.forEach(o -> o.onShow(new BoarActionData(previousPosition, newPosition, isLift, isHidden)));
     }
 
-    public boolean isHidden() {
-        return isHidden;
-    }
-
     public void moveForward(double distance) {
 
         Position previousPosition = new Position(position);
@@ -131,6 +127,10 @@ public class Boar implements ObservableBoar {
 
     public Position getPosition() {
         return position;
+    }
+
+    public void clear() {
+        observers.forEach(BoarObserver::onClear);
     }
 
     @Override
