@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -21,9 +20,11 @@ import pl.edu.agh.to2.dziki.presenter.task.TaskCreator;
 import pl.edu.agh.to2.dziki.presenter.undo.TaskExecutor;
 import pl.edu.agh.to2.dziki.presenter.utils.Helper;
 import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
+import pl.edu.agh.to2.dziki.presenter.utils.SnapshotManager;
 import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class InputController {
     private InputHistory history;
     private TextAutoFiller autoFiller;
     private FileChooser fileChooser;
+    private SnapshotManager snapshotManager;
+    private Helper helper;
     private Boar boar;
 
 
@@ -71,6 +74,8 @@ public class InputController {
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());
         fileChooser = new FileChooser();
+        snapshotManager = new SnapshotManager(drawLayer);
+        helper = new Helper();
         setupFileChooser();
 
         // initialize boar
@@ -194,30 +199,15 @@ public class InputController {
         textArea.appendText("*************PARSING FINISHED*************\n");
     }
 
-    public void saveButtonHandler() {
-        fileChooser.setTitle("Save file");
-        File selectedFile = fileChooser.showSaveDialog(null);
-        if (selectedFile != null) {
-            try (FileWriter fileWriter = new FileWriter(selectedFile, true);
-                 BufferedReader reader = new BufferedReader(new StringReader(textArea.getText()))
-            ) {
-                String line = reader.readLine();
-                while (line != null) {
-                    fileWriter.write(line + System.getProperty("line.separator"));
-                    line = reader.readLine();
-                }
-            } catch (IOException e) {
-                printUserError(e);
-            }
+    public void snapshotButtonHandler() {
+        try {
+            snapshotManager.saveAsPng();
+        } catch (IOException e) {
+            log.error("Could not save snapshot");
         }
-        textArea.appendText("******************SAVED*******************\n");
     }
 
     public void helpButtonHandler() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(Helper.getTITLE());
-        alert.setHeaderText(Helper.getHEADER());
-        alert.setContentText(Helper.getCONTENT());
-        alert.showAndWait();
+        helper.popupHelp();
     }
 }
