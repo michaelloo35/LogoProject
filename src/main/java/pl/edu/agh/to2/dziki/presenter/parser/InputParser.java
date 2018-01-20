@@ -61,7 +61,7 @@ public class InputParser {
                     parseDouble(simpleTask.get(i));
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Incorrect value \"" + simpleTask.get(1) + "\" should be integer");
+            throw new IllegalArgumentException("Parameters have to be numeric values\n");
         }
     }
 
