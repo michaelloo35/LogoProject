@@ -42,27 +42,27 @@ public class TaskCreator {
         return taskList;
     }
 
-    private Task createSimpleTask(final Boar boar, List<String> input, Command command, int commandParameterIndex) {
+    private Task createSimpleTask(final Boar boar, List<String> input, Command command, int lastParameterIndex) {
         Task returnTask = null;
 
-        double arg1 = parseDouble(input.get(commandParameterIndex));
+        double lastParameter = parseDouble(input.get(lastParameterIndex));
 
         switch (command) {
             case FORWARD:
-                returnTask = new Forward(arg1, boar);
+                returnTask = new Forward(lastParameter, boar);
                 break;
             case BACKWARD:
-                returnTask = new Backward(arg1, boar);
+                returnTask = new Backward(lastParameter, boar);
                 break;
             case RIGHT:
-                returnTask = new Right(arg1, boar);
+                returnTask = new Right(lastParameter, boar);
                 break;
             case LEFT:
-                returnTask = new Left(arg1, boar);
+                returnTask = new Left(lastParameter, boar);
                 break;
             case ROTATE:
             case TURN:
-                returnTask = new Turn(arg1, boar);
+                returnTask = new Turn(lastParameter, boar);
                 break;
             case START:
             case RESTART:
@@ -84,13 +84,13 @@ public class TaskCreator {
                 returnTask = new Lower(boar);
                 break;
             case CIRCLE:
-                returnTask = new Circle(arg1, boar);
+                returnTask = new Circle(lastParameter, boar);
                 break;
             case SQUARE:
-                returnTask = new Square(arg1, boar);
+                returnTask = new Square(lastParameter, boar);
                 break;
             case RECTANGLE:
-                returnTask = new Rectangle(arg1, parseDouble(input.get(commandParameterIndex + 1)), boar);
+                returnTask = new Rectangle(lastParameter, parseDouble(input.get(lastParameterIndex - 1)), boar);
                 break;
 
         }

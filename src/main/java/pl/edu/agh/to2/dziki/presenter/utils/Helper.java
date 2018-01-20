@@ -21,21 +21,10 @@ public class Helper {
 
     public void popupHelp() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(Helper.getTITLE());
-        alert.setHeaderText(Helper.getHEADER());
-        alert.setContentText(Helper.getCONTENT());
+        alert.setTitle(TITLE);
+        alert.setHeaderText(HEADER);
+        alert.setContentText(CONTENT);
         alert.showAndWait();
     }
 
-    private static String getTITLE() {
-        return TITLE;
-    }
-
-    private static String getHEADER() {
-        return HEADER;
-    }
-
-    private static String getCONTENT() {
-        return CONTENT;
-    }
 }
