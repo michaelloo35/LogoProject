@@ -27,8 +27,10 @@ public class SnapshotManager {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG", "*.png"));
         File file = fileChooser.showSaveDialog(null);
+        if(file != null){
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+        }
 
-        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
 
     }
 
