@@ -45,24 +45,22 @@ public class TaskCreator {
     private Task createSimpleTask(final Boar boar, List<String> input, Command command, int lastParameterIndex) {
         Task returnTask = null;
 
-        double lastParameter = parseDouble(input.get(lastParameterIndex));
-
         switch (command) {
             case FORWARD:
-                returnTask = new Forward(lastParameter, boar);
+                returnTask = new Forward(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case BACKWARD:
-                returnTask = new Backward(lastParameter, boar);
+                returnTask = new Backward(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case RIGHT:
-                returnTask = new Right(lastParameter, boar);
+                returnTask = new Right(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case LEFT:
-                returnTask = new Left(lastParameter, boar);
+                returnTask = new Left(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case ROTATE:
             case TURN:
-                returnTask = new Turn(lastParameter, boar);
+                returnTask = new Turn(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case START:
             case RESTART:
@@ -84,16 +82,16 @@ public class TaskCreator {
                 returnTask = new Lower(boar);
                 break;
             case CIRCLE:
-                returnTask = new Circle(lastParameter, boar);
+                returnTask = new Circle(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case SQUARE:
-                returnTask = new Square(lastParameter, boar);
+                returnTask = new Square(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case RECTANGLE:
-                returnTask = new Rectangle(parseDouble(input.get(lastParameterIndex - 1)), lastParameter, boar);
+                returnTask = new Rectangle(parseDouble(input.get(lastParameterIndex - 1)), parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case OVAL:
-                returnTask = new Oval(parseDouble(input.get(lastParameterIndex - 1)), lastParameter, boar);
+                returnTask = new Oval(parseDouble(input.get(lastParameterIndex - 1)), parseDouble(input.get(lastParameterIndex)), boar);
 
         }
         return returnTask;
