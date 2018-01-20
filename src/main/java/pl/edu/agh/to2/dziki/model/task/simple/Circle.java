@@ -16,7 +16,7 @@ public class Circle implements Task {
 
     @Override
     public void execute() {
-        this.boar.fillCircle(radius);
+        this.boar.fillOval(2 * radius, 2 * radius);
     }
 
 }

@@ -92,6 +92,8 @@ public class TaskCreator {
             case RECTANGLE:
                 returnTask = new Rectangle(parseDouble(input.get(lastParameterIndex - 1)), lastParameter, boar);
                 break;
+            case OVAL:
+                returnTask = new Oval(parseDouble(input.get(lastParameterIndex - 1)), lastParameter, boar);
 
         }
         return returnTask;

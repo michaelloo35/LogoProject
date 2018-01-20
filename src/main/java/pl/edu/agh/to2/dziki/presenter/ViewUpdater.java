@@ -74,7 +74,7 @@ public class ViewUpdater implements BoarObserver, TaskExecutorObserver {
         boarLayer.getGraphicsContext2D().clearRect(0, 0, boarLayer.getWidth(), boarLayer.getHeight());
     }
 
-    public void clearBothLayers() {
+    private void clearBothLayers() {
         clearDrawLayer();
         clearBoarLayer();
     }
@@ -124,12 +124,12 @@ public class ViewUpdater implements BoarObserver, TaskExecutorObserver {
     }
 
     @Override
-    public void onCircle(BoarActionData data, double radius) {
+    public void onOval(BoarActionData data, double width, double height) {
         GraphicsContext gc = drawLayer.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillOval(
                 data.getNewPosition().getX() + BOAR_TEXTURE_OFFSET,
-                data.getNewPosition().getY() + BOAR_TEXTURE_OFFSET, 2 * radius, 2 * radius);
+                data.getNewPosition().getY() + BOAR_TEXTURE_OFFSET, width, height);
     }
 
     @Override

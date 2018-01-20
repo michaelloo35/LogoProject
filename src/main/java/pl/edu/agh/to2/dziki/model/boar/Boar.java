@@ -112,12 +112,12 @@ public class Boar implements ObservableBoar {
                 new BoarActionData(previousPosition, newPosition, isLift, isHidden), width, height));
     }
 
-    public void fillCircle(double radius) {
+    public void fillOval(double width, double height) {
         Position previousPosition = new Position(position);
         Position newPosition = new Position(position);
 
-        observers.forEach(o -> o.onCircle(
-                new BoarActionData(previousPosition, newPosition, isLift, isHidden), radius));
+        observers.forEach(o -> o.onOval(
+                new BoarActionData(previousPosition, newPosition, isLift, isHidden), width, height));
     }
 
 
