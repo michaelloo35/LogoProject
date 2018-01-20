@@ -90,7 +90,7 @@ public class TaskCreator {
                 returnTask = new Square(lastParameter, boar);
                 break;
             case RECTANGLE:
-                returnTask = new Rectangle(lastParameter, parseDouble(input.get(lastParameterIndex - 1)), boar);
+                returnTask = new Rectangle(parseDouble(input.get(lastParameterIndex - 1)), lastParameter, boar);
                 break;
 
         }
