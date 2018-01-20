@@ -1,0 +1,46 @@
+loop 36 forward 100 backward 100 turn 10 endloop
+lift forward 200 lower
+loop 36 forward 100 backward 100 turn 10 endloop
+lift forward 200 lower
+loop 36 forward 100 backward 100 turn 10 endloop
+lift forward 200 lower
+loop 36 forward 100 backward 100 turn 10 endloop
+lift forward 200 lower
+loop 36 forward 100 backward 100 turn 10 endloop
+lift forward 200 lower
+loop 36 forward 100 backward 100 turn 10 endloop
+rotate 90
+lift forward 100 lower
+rotate 90
+lift forward 100 lower
+loop 36 forward 100 backward 100 turn 10 endloop
+lift forward 100 lower
+lift forward 100 lower
+loop 36 forward 100 backward 100 turn 10 endloop
+lift forward 200 lower
+loop 36 forward 100 backward 100 turn 10 endloop
+lift forward 200 lower
+loop 36 forward 100 backward 100 turn 10 endloop
+lift forward 200 lower
+loop 36 forward 100 backward 100 turn 10 endloop
+lift forward 50 lower
+lift right 100 lower
+turn 90
+lift forward 500 lower
+lift forward 50 lower
+lift forward 50 lower
+loop 15 circle 10 turn 12.5 forward 40 square 15 turn 12.5 forward 20 endloop
+lift forward 100 turn 30 lower
+loop 15 circle 10 turn 12.5 forward 40 square 15 turn 12.5 forward 20 endloop
+lift forward 100 turn 30 lower
+loop 15 circle 10 turn 12.5 forward 40 square 15 turn 12.5 forward 20 endloop
+lift forward 100 turn 30 lower
+loop 15 circle 10 turn 12.5 forward 40 square 15 turn 12.5 forward 20 endloop
+lift forward 100 turn 30 lower
+loop 15 circle 10 turn 12.5 forward 40 square 15 turn 12.5 forward 20 endloop
+lift forward 100 turn 30 lower
+loop 15 circle 10 turn 12.5 forward 40 square 15 turn 12.5 forward 20 endloop
+lift forward 100 turn 30 lower
+loop 15 circle 10 turn 12.5 forward 40 square 15 turn 12.5 forward 20 endloop
+lift forward 100 turn 30 lower
+loop 15 circle 10 turn 12.5 forward 40 square 15 turn 12.5 forward 20 endloop
