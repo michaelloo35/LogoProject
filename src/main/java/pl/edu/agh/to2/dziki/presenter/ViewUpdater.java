@@ -116,20 +116,24 @@ public class ViewUpdater implements BoarObserver, TaskExecutorObserver {
 
     @Override
     public void onRectangle(BoarActionData data, double width, double height) {
-        GraphicsContext gc = drawLayer.getGraphicsContext2D();
-        gc.setFill(Color.BLACK);
-        gc.fillRect(
-                data.getNewPosition().getX() + BOAR_TEXTURE_OFFSET,
-                data.getNewPosition().getY() + BOAR_TEXTURE_OFFSET, width, height);
+        if (!data.isLift()) {
+            GraphicsContext gc = drawLayer.getGraphicsContext2D();
+            gc.setFill(Color.BLACK);
+            gc.fillRect(
+                    data.getNewPosition().getX() + BOAR_TEXTURE_OFFSET,
+                    data.getNewPosition().getY() + BOAR_TEXTURE_OFFSET, width, height);
+        }
     }
 
     @Override
     public void onOval(BoarActionData data, double width, double height) {
-        GraphicsContext gc = drawLayer.getGraphicsContext2D();
-        gc.setFill(Color.BLACK);
-        gc.fillOval(
-                data.getNewPosition().getX() + BOAR_TEXTURE_OFFSET,
-                data.getNewPosition().getY() + BOAR_TEXTURE_OFFSET, width, height);
+        if (!data.isLift()) {
+            GraphicsContext gc = drawLayer.getGraphicsContext2D();
+            gc.setFill(Color.BLACK);
+            gc.fillOval(
+                    data.getNewPosition().getX() + BOAR_TEXTURE_OFFSET,
+                    data.getNewPosition().getY() + BOAR_TEXTURE_OFFSET, width, height);
+        }
     }
 
     @Override
