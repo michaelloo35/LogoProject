@@ -25,6 +25,7 @@ public class View {
     private void setupStage() throws IOException {
         primaryStage.setTitle(TITLE);
         primaryStage.setScene(new Scene(getRoot()));
+        primaryStage.setResizable(false);
     }
 
     private Parent getRoot() throws java.io.IOException {

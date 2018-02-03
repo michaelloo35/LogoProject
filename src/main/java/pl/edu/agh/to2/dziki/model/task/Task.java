@@ -4,5 +4,4 @@ public interface Task {
 
     void execute();
 
-    boolean isComplex();
 }

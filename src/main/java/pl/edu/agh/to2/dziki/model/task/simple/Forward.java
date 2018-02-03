@@ -18,8 +18,4 @@ public class Forward implements Task {
         boar.moveForward(distance);
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

@@ -42,25 +42,25 @@ public class TaskCreator {
         return taskList;
     }
 
-    private Task createSimpleTask(final Boar boar, List<String> input, Command command, int commandParameterIndex) {
+    private Task createSimpleTask(final Boar boar, List<String> input, Command command, int lastParameterIndex) {
         Task returnTask = null;
 
         switch (command) {
             case FORWARD:
-                returnTask = new Forward(parseDouble(input.get(commandParameterIndex)), boar);
+                returnTask = new Forward(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case BACKWARD:
-                returnTask = new Backward(parseDouble(input.get(commandParameterIndex)), boar);
+                returnTask = new Backward(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case RIGHT:
-                returnTask = new Right(parseDouble(input.get(commandParameterIndex)), boar);
+                returnTask = new Right(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case LEFT:
-                returnTask = new Left(parseDouble(input.get(commandParameterIndex)), boar);
+                returnTask = new Left(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case ROTATE:
             case TURN:
-                returnTask = new Turn(parseDouble(input.get(commandParameterIndex)), boar);
+                returnTask = new Turn(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
             case START:
             case RESTART:
@@ -72,6 +72,9 @@ public class TaskCreator {
             case SHOW:
                 returnTask = new Show(boar);
                 break;
+            case CLEAR:
+                returnTask = new Clear(boar);
+                break;
             case LIFT:
                 returnTask = new Lift(boar);
                 break;
@@ -79,8 +82,17 @@ public class TaskCreator {
                 returnTask = new Lower(boar);
                 break;
             case CIRCLE:
-                returnTask = new Circle(parseDouble(input.get(commandParameterIndex)), boar);
+                returnTask = new Circle(parseDouble(input.get(lastParameterIndex)), boar);
                 break;
+            case SQUARE:
+                returnTask = new Square(parseDouble(input.get(lastParameterIndex)), boar);
+                break;
+            case RECTANGLE:
+                returnTask = new Rectangle(parseDouble(input.get(lastParameterIndex - 1)), parseDouble(input.get(lastParameterIndex)), boar);
+                break;
+            case OVAL:
+                returnTask = new Oval(parseDouble(input.get(lastParameterIndex - 1)), parseDouble(input.get(lastParameterIndex)), boar);
+
         }
         return returnTask;
     }
@@ -96,7 +108,7 @@ public class TaskCreator {
             loopTaskList.add(createSimpleTask(boar, simpleTasks, command, i + command.getArgumentsNumber()));
             i += command.getArgumentsNumber();
         }
-        return new Loop(boar, loopIterations, loopTaskList);
+        return new Loop(loopIterations, loopTaskList);
     }
 
     /**

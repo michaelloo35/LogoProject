@@ -5,6 +5,18 @@ public class Position {
     private double y;
     private double rotation;
 
+    public Position() {
+        this.x = 0;
+        this.y = 0;
+        this.rotation = 0;
+    }
+
+    public Position(Position other) {
+        this.x = other.getX();
+        this.y = other.getY();
+        this.rotation = other.getRotation();
+    }
+
     public double getX() {
         return x;
     }

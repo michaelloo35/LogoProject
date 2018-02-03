@@ -18,8 +18,4 @@ public class Turn implements Task {
         boar.rotate(degrees);
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

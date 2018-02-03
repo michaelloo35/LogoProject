@@ -5,7 +5,7 @@ import pl.edu.agh.to2.dziki.model.task.Task;
 
 public class Circle implements Task {
 
-    private double radius;
+    private final double radius;
     private final Boar boar;
 
     public Circle(double radius, Boar boar) {
@@ -16,11 +16,7 @@ public class Circle implements Task {
 
     @Override
     public void execute() {
-
+        this.boar.fillOval(2 * radius, 2 * radius);
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

@@ -19,7 +19,10 @@ public enum Command {
     LOWER(0),
     LOOP(-1),
     ENDLOOP(0),
-    CIRCLE(1);
+    CIRCLE(1),
+    SQUARE(1),
+    RECTANGLE(2),
+    OVAL(2);
 
     private final int argumentsNumber;
 

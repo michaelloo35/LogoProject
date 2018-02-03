@@ -4,30 +4,25 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
+import pl.edu.agh.to2.dziki.model.task.simple.Restart;
 import pl.edu.agh.to2.dziki.presenter.parser.Command;
 import pl.edu.agh.to2.dziki.presenter.parser.InputParser;
 import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
 import pl.edu.agh.to2.dziki.presenter.task.TaskCreator;
-import pl.edu.agh.to2.dziki.presenter.task.TaskExecutor;
-import pl.edu.agh.to2.dziki.presenter.undo.UndoManager;
-import pl.edu.agh.to2.dziki.presenter.utils.Helper;
-import pl.edu.agh.to2.dziki.presenter.utils.InputHistory;
-import pl.edu.agh.to2.dziki.presenter.utils.TextAutoFiller;
+import pl.edu.agh.to2.dziki.presenter.undo.TaskExecutor;
+import pl.edu.agh.to2.dziki.presenter.utils.*;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 public class InputController {
@@ -37,10 +32,11 @@ public class InputController {
     private InputParser inputParser;
     private TaskCreator taskCreator;
     private TaskExecutor taskExecutor;
-    private UndoManager undoManager;
     private InputHistory history;
     private TextAutoFiller autoFiller;
-    private FileChooser fileChooser;
+    private ScriptLoader scriptLoader;
+    private SnapshotManager snapshotManager;
+    private Helper helper;
     private Boar boar;
 
 
@@ -57,20 +53,35 @@ public class InputController {
     private TextArea textArea;
 
 
-
     @FXML
     public void initialize() {
         inputParser = new InputParser();
         taskCreator = new TaskCreator();
-        taskExecutor = new TaskExecutor();
         boar = new Boar();
-        ViewUpdater viewUpdater = new ViewUpdater(boarLayer, drawLayer, boar);
-        undoManager = new UndoManager(taskExecutor, viewUpdater, boar);
+
+        // setup boar initialization
+        List<Task> setupTasks = boarSetupTasks();
+
+        taskExecutor = new TaskExecutor(setupTasks.size());
+        new ViewUpdater(boarLayer, drawLayer, boar, taskExecutor);
         history = new InputHistory(HISTORY_SIZE);
         autoFiller = new TextAutoFiller(Command.getCommandNames());
-        fileChooser = new FileChooser();
-        setupFileChooser();
+        scriptLoader = new ScriptLoader(inputParser, taskCreator, taskExecutor, boar);
+        snapshotManager = new SnapshotManager(drawLayer);
+        helper = new Helper();
 
+        // initialize boar
+        taskExecutor.executeTasks(setupTasks);
+
+    }
+
+    /**
+     * @return List of tasks to be executed on application startup to setup initial boar state
+     */
+    private List<Task> boarSetupTasks() {
+        List<Task> initializationTasks = new ArrayList<>();
+        initializationTasks.add(new Restart((boar)));
+        return initializationTasks;
     }
 
     @FXML
@@ -136,6 +147,7 @@ public class InputController {
         String message = textField.getText();
         textArea.appendText(message + "\n");
         history.add(message);
+
         try {
             ValidatedInput validatedInput = inputParser.validate(inputParser.parse(message));
             List<Task> tasks = taskCreator.createTaskList(boar, validatedInput);
@@ -143,6 +155,7 @@ public class InputController {
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
             printUserError(e);
         }
+
         textField.clear();
     }
 
@@ -152,58 +165,29 @@ public class InputController {
         textArea.appendText("******************ERROR******************\n");
     }
 
-    private void setupFileChooser() {
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("TXT", "*.txt")
-        );
-    }
-
     public void undoButtonHandler(ActionEvent actionEvent) {
-        undoManager.undo();
+        taskExecutor.undo();
     }
 
     public void fileButtonHandler() {
-        fileChooser.setTitle("Choose LOGO script");
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            try (Stream<String> file = Files.lines(Paths.get(selectedFile.toURI()))) {
-                for (String line : (Iterable<String>) file::iterator) {
-                    ValidatedInput validatedInput = inputParser.validate(inputParser.parse(line));
-                    List<Task> tasks = taskCreator.createTaskList(boar, validatedInput);
-                    taskExecutor.executeTasks(tasks);
-                }
-            } catch (IOException | IllegalArgumentException | IndexOutOfBoundsException e) {
-                printUserError(e);
-            }
+        try {
+            scriptLoader.load();
+            textArea.appendText("*************Script executed*************\n");
         }
-        textArea.appendText("*************PARSING FINISHED*************\n");
+        catch (ParseException e){
+            printUserError(e);
+        }
     }
 
-    public void saveButtonHandler() {
-        fileChooser.setTitle("Save file");
-        File selectedFile = fileChooser.showSaveDialog(null);
-        if (selectedFile != null) {
-            try (FileWriter fileWriter = new FileWriter(selectedFile, true);
-                 BufferedReader reader = new BufferedReader(new StringReader(textArea.getText()))
-            ) {
-                String line = reader.readLine();
-                while (line != null) {
-                    fileWriter.write(line + System.getProperty("line.separator"));
-                    line = reader.readLine();
-                }
-            } catch (IOException e) {
-                printUserError(e);
-            }
+    public void snapshotButtonHandler() {
+        try {
+            snapshotManager.saveAsPng();
+        } catch (IOException e) {
+            log.error("Could not save snapshot");
         }
-        textArea.appendText("******************SAVED*******************\n");
     }
 
     public void helpButtonHandler() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(Helper.getTITLE());
-        alert.setHeaderText(Helper.getHEADER());
-        alert.setContentText(Helper.getCONTENT());
-        alert.showAndWait();
+        helper.popupHelp();
     }
 }

@@ -6,12 +6,12 @@ import pl.edu.agh.to2.dziki.model.boar.Boar;
 import pl.edu.agh.to2.dziki.model.task.Task;
 import pl.edu.agh.to2.dziki.model.task.complex.Loop;
 import pl.edu.agh.to2.dziki.model.task.simple.*;
-import pl.edu.agh.to2.dziki.presenter.task.TaskCreator;
 import pl.edu.agh.to2.dziki.presenter.parser.ValidatedInput;
+import pl.edu.agh.to2.dziki.presenter.task.TaskCreator;
 
-import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
@@ -24,7 +24,7 @@ public class TaskCreatorTest {
     @Before
     public void setUp() {
         taskCreator = new TaskCreator();
-        Boar boar = mock(Boar.class);
+        boar = mock(Boar.class);
     }
 
 
@@ -32,10 +32,10 @@ public class TaskCreatorTest {
     public void interpretAndGenerateSimpleTasks1Test() {
 
         //given
-        ValidatedInput validInput = new ValidatedInput(Arrays.asList("FORWARD", "100"));
+        ValidatedInput validInput = new ValidatedInput(asList("FORWARD", "100"));
 
         //when
-        List<Task> expectedResult = Arrays.asList(new Forward(100, boar));
+        List<Task> expectedResult = asList(new Forward(100, boar));
         List<Task> output = taskCreator.createTaskList(boar, validInput);
 
         //then
@@ -49,10 +49,10 @@ public class TaskCreatorTest {
     public void interpretAndGenerateSimpleTasks2Test() {
 
         //given
-        ValidatedInput validInput = new ValidatedInput(Arrays.asList("TURN", "10", "BACKWARD", "5"));
+        ValidatedInput validInput = new ValidatedInput(asList("TURN", "10", "BACKWARD", "5"));
 
         //when
-        List<Task> expectedResult = Arrays.asList(new Turn(10, boar), new Backward(5, boar));
+        List<Task> expectedResult = asList(new Turn(10, boar), new Backward(5, boar));
         List<Task> output = taskCreator.createTaskList(boar, validInput);
 
         //then
@@ -65,10 +65,10 @@ public class TaskCreatorTest {
     public void interpretAndGenerateSimpleTasks3Test() {
 
         //given
-        ValidatedInput validInput = new ValidatedInput(Arrays.asList("CIRCLE", "10", "HIDE"));
+        ValidatedInput validInput = new ValidatedInput(asList("CIRCLE", "10", "HIDE"));
 
         //when
-        List<Task> expectedResult = Arrays.asList(new Circle(10, boar), new Hide(boar));
+        List<Task> expectedResult = asList(new Circle(10, boar), new Hide(boar));
         List<Task> output = taskCreator.createTaskList(boar, validInput);
 
         //then
@@ -81,10 +81,10 @@ public class TaskCreatorTest {
     public void interpretAndGenerateSimpleTasks4Test() {
 
         //given
-        ValidatedInput validInput = new ValidatedInput(Arrays.asList("SHOW", "HIDE", "LIFT", "LOWER"));
+        ValidatedInput validInput = new ValidatedInput(asList("SHOW", "HIDE", "LIFT", "LOWER"));
 
         //when
-        List<Task> expectedResult = Arrays.asList(new Show(boar), new Hide(boar), new Lift(boar), new Lower(boar));
+        List<Task> expectedResult = asList(new Show(boar), new Hide(boar), new Lift(boar), new Lower(boar));
         List<Task> output = taskCreator.createTaskList(boar, validInput);
 
         //then
@@ -97,10 +97,10 @@ public class TaskCreatorTest {
     public void interpretAndGenerateComplexTasks1Test() {
 
         //given
-        ValidatedInput validInput = new ValidatedInput(Arrays.asList("LOOP", "10", "FORWARD", "10", "ENDLOOP"));
+        ValidatedInput validInput = new ValidatedInput(asList("LOOP", "10", "FORWARD", "10", "ENDLOOP"));
 
         //when
-        List<Task> expectedResult = Arrays.asList(new Loop(boar, 10, Arrays.asList(new Forward(10, boar))));
+        List<Task> expectedResult = asList(new Loop(10, asList(new Forward(10, boar))));
         List<Task> output = taskCreator.createTaskList(boar, validInput);
 
         //then
@@ -113,11 +113,11 @@ public class TaskCreatorTest {
     public void interpretAndGenerateComplexTasks2Test() {
 
         //given
-        ValidatedInput validInput = new ValidatedInput(Arrays.asList("LOOP", "10", "FORWARD", "10.5", "TURN", "10", "ENDLOOP"));
+        ValidatedInput validInput = new ValidatedInput(asList("LOOP", "10", "FORWARD", "10.5", "TURN", "10", "ENDLOOP"));
 
         //when
-        List<Task> expectedResult = Arrays.asList(new Loop(boar, 10,
-                Arrays.asList(new Forward(10, boar), new Turn(10, boar))));
+        List<Task> expectedResult = asList(
+                new Loop(10, asList(new Forward(10, boar), new Turn(10, boar))));
         List<Task> output = taskCreator.createTaskList(boar, validInput);
 
         //then
@@ -130,12 +130,12 @@ public class TaskCreatorTest {
     public void interpretAndGenerateComplexTasks3Test() {
 
         //given
-        ValidatedInput validInput = new ValidatedInput(Arrays.asList("TURN", "10", "LOOP", "10", "FORWARD",
+        ValidatedInput validInput = new ValidatedInput(asList("TURN", "10", "LOOP", "10", "FORWARD",
                 "10.5", "TURN", "10", "ENDLOOP", "HIDE"));
 
         //when
-        List<Task> expectedResult = Arrays.asList(new Turn(10, boar), new Loop(boar, 10,
-                Arrays.asList(new Forward(10, boar), new Turn(10, boar))), new Hide(boar));
+        List<Task> expectedResult = asList(new Turn(10, boar), new Loop(10,
+                asList(new Forward(10, boar), new Turn(10, boar))), new Hide(boar));
         List<Task> output = taskCreator.createTaskList(boar, validInput);
 
         //then
@@ -148,14 +148,14 @@ public class TaskCreatorTest {
     public void interpretAndGenerateComplexTasks4Test() {
 
         //given
-        ValidatedInput validInput = new ValidatedInput(Arrays.asList("LOOP", "10", "FORWARD",
+        ValidatedInput validInput = new ValidatedInput(asList("LOOP", "10", "FORWARD",
                 "10.5", "TURN", "10", "ENDLOOP", "LOOP", "50", "RIGHT",
                 "123", "CIRCLE", "50.5", "ENDLOOP"));
 
         //when
-        List<Task> expectedResult = Arrays.asList(new Loop(boar, 10,
-                        Arrays.asList(new Forward(10, boar), new Turn(10, boar))),
-                new Loop(boar, 50, Arrays.asList(new Right(123, boar), new Circle(50.5, boar))));
+        List<Task> expectedResult = asList(new Loop(10,
+                        asList(new Forward(10, boar), new Turn(10, boar))),
+                new Loop(50, asList(new Right(123, boar), new Circle(50.5, boar))));
         List<Task> output = taskCreator.createTaskList(boar, validInput);
 
         //then

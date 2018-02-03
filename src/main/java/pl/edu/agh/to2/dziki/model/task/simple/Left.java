@@ -19,8 +19,4 @@ public class Left implements Task {
         boar.moveForward(xAxisShift);
     }
 
-    @Override
-    public boolean isComplex() {
-        return false;
-    }
 }

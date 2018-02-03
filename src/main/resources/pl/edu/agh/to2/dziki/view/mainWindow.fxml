@@ -37,7 +37,7 @@
             <children>
                 <HBox prefHeight="73.0" prefWidth="1239.0" spacing="10.0">
                     <children>
-                  <Button mnemonicParsing="false" onAction="#helpButtonHandler" stylesheets="@stylesheet.css" text="HELP" textAlignment="CENTER">
+                  <Button mnemonicParsing="false" onAction="#helpButtonHandler" prefHeight="29.0" prefWidth="271.0" stylesheets="@stylesheet.css" text="HELP" textAlignment="CENTER">
                      <font>
                         <Font name="Trebuchet MS Bold" size="15.0" />
                      </font>
@@ -46,7 +46,7 @@
                      </HBox.margin>
                   </Button>
                         <Pane opacity="0.0" prefHeight="34.0" prefWidth="972.0" stylesheets="@stylesheet.css" />
-                        <Button mnemonicParsing="false" onAction="#fileButtonHandler" stylesheets="@stylesheet.css" text="FILE" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#undoButtonHandler" prefHeight="29.0" prefWidth="255.0" stylesheets="@stylesheet.css" text="UNDO" textAlignment="CENTER">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="15.0" />
                             </font>
@@ -54,7 +54,7 @@
                                 <Insets top="5.0" />
                             </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#saveButtonHandler" stylesheets="@stylesheet.css" text="SAVE" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#fileButtonHandler" prefHeight="29.0" prefWidth="305.0" stylesheets="@stylesheet.css" text="LOAD SCRIPT" textAlignment="CENTER">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="15.0" />
                             </font>
@@ -62,7 +62,7 @@
                                 <Insets top="5.0" />
                             </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#undoButtonHandler" prefHeight="29.0" prefWidth="66.0" stylesheets="@stylesheet.css" text="UNDO" textAlignment="CENTER">
+                        <Button mnemonicParsing="false" onAction="#snapshotButtonHandler" prefHeight="29.0" prefWidth="368.0" stylesheets="@stylesheet.css" text="TAKE SNAPSHOT" textAlignment="CENTER">
                             <font>
                                 <Font name="Trebuchet MS Bold" size="15.0" />
                             </font>
