@@ -1,3 +1,6 @@
+# Main Objective
+* Write an application following rules of OOP and maintaining code clean
+
 # Launch Instruction
 
 * launch pl.edu.agh.to2.dziki.application.Main
@@ -6,3 +9,7 @@
 
 ##### Project cration log[in polish]:
 https://docs.google.com/document/d/1EMJtLbAl9lzvuE-uNd-yKWUKt_6gvhSghgfLAnARzuI/edit?usp=sharing
+
+# Authors
+* Michał Matusiak
+* Mateusz Woś
